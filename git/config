@@ -25,3 +25,6 @@
     co = "!printf '\\033[90m> git checkout\\033[0m\\n' && git checkout \"$@\""
     amne = "!printf '\\033[90m> git commit --amend --no-edit\\033[0m\\n' && git commit --amend --no-edit \"$@\""
     ls = "!printf '\\033[90m> git log --oneline --decorate --graph --all\\033[0m\\n' && git log --oneline --decorate --graph --all \"$@\""
+    sh = "!printf '\\033[90m> git show\\033[0m\\n' && git show \"$@\""
+    unc = "!printf '\\033[90m> git reset --soft @^\\033[0m\\n' && git reset --soft @^ \"$@\""
+    rec = "!printf '\\033[90m> git commit --reuse-message=HEAD@{1}\\033[0m\\n' && git commit --reuse-message=HEAD@{1} \"$@\""

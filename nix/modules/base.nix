@@ -28,6 +28,7 @@
     rustup
 
     # CLI tools
+    neovim
     gh
     tmux
     jq

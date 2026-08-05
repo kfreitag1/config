@@ -33,8 +33,10 @@ in
   homebrew = {
     enable = true;
     taps = [
-      "LizardByte/homebrew" # For sunshine
-      "shopify/shopify"
+      {
+        name = "shopify/shopify";
+        trusted = true;
+      }
     ];
     casks = [
       "google-chrome"
@@ -53,7 +55,7 @@ in
       "markedit"
       "yaak"
       "qbittorrent"
-      "claude-code"
+      "claude-code@latest"
       "anki"
       "the-unarchiver"
       "dbeaver-community"
@@ -61,7 +63,6 @@ in
     brews = [
       "openfst"
       "openjdk"
-      "sunshine"
       "gemini-cli"
       "lazygit"
       "lazydocker"

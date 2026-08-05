@@ -37,7 +37,6 @@
     fzf
     uv
     bun
-    delta
     inputs.agenix.packages.${pkgs.system}.default
   ];
 
@@ -56,6 +55,7 @@
       "cmux"
       "lm-studio"
       "1password"
+      "betterdisplay"
     ];
     brews = [
       "agent-browser"
@@ -64,6 +64,10 @@
       "pi-coding-agent"
       "skills"
       "herdr"
+      "git-delta"
+      "tree-sitter-cli"
+      "ripgrep"
+      "fd"
     ];
     onActivation.cleanup = "zap";
     onActivation.autoUpdate = true;

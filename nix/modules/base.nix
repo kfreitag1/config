@@ -55,7 +55,6 @@
       "cmux"
       "lm-studio"
       "1password"
-      "betterdisplay"
     ];
     brews = [
       "agent-browser"

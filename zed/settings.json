@@ -153,16 +153,17 @@
   "ui_font_weight": 350.0,
   "ssh_connections": [
     {
-      "host": "home.kfreitag.ca",
+      "host": "homeserver",
+      "username": "kieran",
       "args": [],
       "projects": [
         {
           "paths": [
             "/home/kieran"
-          ],
-        },
-      ],
-    },
+          ]
+        }
+      ]
+    }
   ],
   "use_system_path_prompts": false,
   "vertical_scroll_margin": 12,

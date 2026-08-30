@@ -1,6 +1,11 @@
 {
-  "lastChangelogVersion": "0.79.10",
+  "lastChangelogVersion": "0.84.3",
   "defaultProvider": "openrouter",
-  "defaultModel": "z-ai/glm-5.2",
-  "theme": "dark"
+  "defaultModel": "z-ai/glm-5.3-flash",
+  "theme": "dark",
+  "packages": [
+    "npm:@tintinweb/pi-subagents",
+    "npm:pi-web-access",
+    "../../../Developer/pi-model-price"
+  ]
 }

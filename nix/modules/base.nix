@@ -67,6 +67,7 @@
       "tree-sitter-cli"
       "ripgrep"
       "fd"
+      "restic"
     ];
     onActivation.cleanup = "zap";
     onActivation.autoUpdate = true;

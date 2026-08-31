@@ -1,0 +1,113 @@
+{"timestamp":"2026-10-09 15:28:02.275","source":"Server.js:208","message":"=== Starting Server ===","levelName":"INFO","level":2}
+{"timestamp":"2026-10-09 15:28:02.275","source":"Server.js:136","message":"[Server] Init v2.37.1","levelName":"INFO","level":2}
+{"timestamp":"2026-10-09 15:28:02.275","source":"Server.js:137","message":"[Server] Node.js Version: v24.21.0","levelName":"INFO","level":2}
+{"timestamp":"2026-10-09 15:28:02.275","source":"Server.js:138","message":"[Server] Platform: linux","levelName":"INFO","level":2}
+{"timestamp":"2026-10-09 15:28:02.275","source":"Server.js:139","message":"[Server] Arch: x64","levelName":"INFO","level":2}
+{"timestamp":"2026-10-09 15:28:02.277","source":"Database.js:133","message":"[Database] absdatabase.sqlite not found at /config/absdatabase.sqlite","levelName":"INFO","level":2}
+{"timestamp":"2026-10-09 15:28:02.277","source":"Database.js:171","message":"[Database] Initializing db at \"/config/absdatabase.sqlite\"","levelName":"INFO","level":2}
+{"timestamp":"2026-10-09 15:28:02.297","source":"Database.js:241","message":"[Database] Loading extension /usr/local/lib/nusqlite3/libnusqlite3.so","levelName":"INFO","level":2}
+{"timestamp":"2026-10-09 15:28:02.297","source":"Database.js:249","message":"[Database] Successfully loaded extension /usr/local/lib/nusqlite3/libnusqlite3.so","levelName":"INFO","level":2}
+{"timestamp":"2026-10-09 15:28:02.297","source":"Database.js:218","message":"[Database] Db supports unaccent and unicode foldings","levelName":"INFO","level":2}
+{"timestamp":"2026-10-09 15:28:02.297","source":"Database.js:222","message":"[Database] Db connection was successful","levelName":"INFO","level":2}
+{"timestamp":"2026-10-09 15:28:02.358","source":"MigrationManager.js:75","message":"[MigrationManager] Database is new. Skipping migrations.","levelName":"INFO","level":2}
+{"timestamp":"2026-10-09 15:28:03.242","source":"Database.js:159","message":"[Database] Db initialized with models: user, session, apiKey, library, libraryFolder, book, podcast, podcastEpisode, libraryItem, mediaProgress, series, bookSeries, author, bookAuthor, collection, collectionBook, playlist, playlistMediaItem, device, playbackSession, feed, feedEpisode, setting, customMetadataProvider, mediaItemShare","levelName":"INFO","level":2}
+{"timestamp":"2026-10-09 15:28:03.243","source":"Database.js:782","message":"[Database] Adding trigger update_library_items_title","levelName":"INFO","level":2}
+{"timestamp":"2026-10-09 15:28:03.257","source":"Database.js:782","message":"[Database] Adding trigger update_library_items_title_ignore_prefix","levelName":"INFO","level":2}
+{"timestamp":"2026-10-09 15:28:03.275","source":"Database.js:782","message":"[Database] Adding trigger update_library_items_title_from_podcasts_title","levelName":"INFO","level":2}
+{"timestamp":"2026-10-09 15:28:03.292","source":"Database.js:782","message":"[Database] Adding trigger update_library_items_title_ignore_prefix_from_podcasts_title_ignore_prefix","levelName":"INFO","level":2}
+{"timestamp":"2026-10-09 15:28:03.309","source":"Database.js:817","message":"[Database] Adding trigger update_library_items_author_names_on_book_authors_insert","levelName":"INFO","level":2}
+{"timestamp":"2026-10-09 15:28:03.326","source":"Database.js:817","message":"[Database] Adding trigger update_library_items_author_names_on_book_authors_delete","levelName":"INFO","level":2}
+{"timestamp":"2026-10-09 15:28:03.342","source":"Database.js:839","message":"[Database] Adding trigger update_library_items_author_names_on_authors_update","levelName":"INFO","level":2}
+{"timestamp":"2026-10-09 15:28:03.380","source":"Database.js:162","message":"[Database] running ANALYZE","levelName":"INFO","level":2}
+{"timestamp":"2026-10-09 15:28:03.393","source":"Database.js:164","message":"[Database] ANALYZE completed","levelName":"INFO","level":2}
+{"timestamp":"2026-10-09 15:28:03.393","source":"Server.js:153","message":"[Server] Serving from base path \"/audiobookshelf\"","levelName":"INFO","level":2}
+{"timestamp":"2026-10-09 15:28:03.394","source":"TokenManager.js:44","message":"[TokenManager] JWT secret key not found, generating one","levelName":"INFO","level":2}
+{"timestamp":"2026-10-09 15:28:03.410","source":"LogManager.js:59","message":"[LogManager] Init current daily log filename: 2026-10-09.txt","levelName":"INFO","level":2}
+{"timestamp":"2026-10-09 15:28:03.414","source":"BackupManager.js:288","message":"[BackupManager] 0 Backups Found","levelName":"INFO","level":2}
+{"timestamp":"2026-10-09 15:28:03.414","source":"BackupManager.js:64","message":"[BackupManager] Auto Backups are disabled","levelName":"INFO","level":2}
+{"timestamp":"2026-10-09 15:28:03.425","source":"Server.js:410","message":"Listening on port :80","levelName":"INFO","level":2}
+{"timestamp":"2026-10-09 15:33:46.730","source":"Server.js:417","message":"[Server] Initializing new server","levelName":"INFO","level":2}
+{"timestamp":"2026-10-09 15:33:50.449","source":"LocalAuthStrategy.js:81","message":"[LocalAuth] User \"root\" logged in from ip 104.22.31.132","levelName":"INFO","level":2}
+{"timestamp":"2026-10-09 15:33:50.640","source":"SocketAuthority.js:166","message":"[SocketAuthority] Socket Connected to /audiobookshelf/socket.io QT76opWctkaNYqhtAAAB","levelName":"INFO","level":2}
+{"timestamp":"2026-10-09 15:35:35.726","source":"MiscController.js:664","message":"[MiscController] Disabling active auth method \"local\"","levelName":"INFO","level":2}
+{"timestamp":"2026-10-09 15:35:35.727","source":"MiscController.js:669","message":"[MiscController] Enabling active auth method \"openid\"","levelName":"INFO","level":2}
+{"timestamp":"2026-10-09 15:36:23.177","source":"SocketAuthority.js:204","message":"[SocketAuthority] Socket QT76opWctkaNYqhtAAAB disconnected from client \"root\" after 152537ms (Reason: client namespace disconnect)","levelName":"INFO","level":2}
+{"timestamp":"2026-10-09 15:36:23.204","source":"TokenManager.js:498","message":"[TokenManager] Refresh token invalidated, 1 sessions deleted","levelName":"INFO","level":2}
+{"timestamp":"2026-10-09 15:36:56.960","source":"OidcAuthStrategy.js:123","message":"[User] openid: Auto-registering user with sub \"eb894fe9-7c02-4471-9577-0d7b69366f36\" {\n  display_name: 'Kieran Freitag',\n  email: 'kfreitag@kieran.ca',\n  email_verified: true,\n  family_name: 'Freitag',\n  given_name: 'Kieran',\n  name: 'Kieran Freitag',\n  picture: 'https://id.kfreitag.ca/api/users/eb894fe9-7c02-4471-9577-0d7b69366f36/profile-picture.png',\n  preferred_username: 'kieran',\n  sub: 'eb894fe9-7c02-4471-9577-0d7b69366f36'\n}","levelName":"INFO","level":2}
+{"timestamp":"2026-10-09 15:36:57.432","source":"SocketAuthority.js:166","message":"[SocketAuthority] Socket Connected to /audiobookshelf/socket.io snOiE0U763Bdl7O3AAAD","levelName":"INFO","level":2}
+{"timestamp":"2026-10-09 15:38:02.957","source":"Server.js:208","message":"=== Starting Server ===","levelName":"INFO","level":2}
+{"timestamp":"2026-10-09 15:38:02.957","source":"Server.js:136","message":"[Server] Init v2.37.1","levelName":"INFO","level":2}
+{"timestamp":"2026-10-09 15:38:02.957","source":"Server.js:137","message":"[Server] Node.js Version: v24.21.0","levelName":"INFO","level":2}
+{"timestamp":"2026-10-09 15:38:02.957","source":"Server.js:138","message":"[Server] Platform: linux","levelName":"INFO","level":2}
+{"timestamp":"2026-10-09 15:38:02.957","source":"Server.js:139","message":"[Server] Arch: x64","levelName":"INFO","level":2}
+{"timestamp":"2026-10-09 15:38:02.959","source":"Database.js:171","message":"[Database] Initializing db at \"/config/absdatabase.sqlite\"","levelName":"INFO","level":2}
+{"timestamp":"2026-10-09 15:38:02.974","source":"Database.js:241","message":"[Database] Loading extension /usr/local/lib/nusqlite3/libnusqlite3.so","levelName":"INFO","level":2}
+{"timestamp":"2026-10-09 15:38:02.975","source":"Database.js:249","message":"[Database] Successfully loaded extension /usr/local/lib/nusqlite3/libnusqlite3.so","levelName":"INFO","level":2}
+{"timestamp":"2026-10-09 15:38:02.975","source":"Database.js:218","message":"[Database] Db supports unaccent and unicode foldings","levelName":"INFO","level":2}
+{"timestamp":"2026-10-09 15:38:02.975","source":"Database.js:222","message":"[Database] Db connection was successful","levelName":"INFO","level":2}
+{"timestamp":"2026-10-09 15:38:02.978","source":"MigrationManager.js:80","message":"[MigrationManager] Database is already up to date.","levelName":"INFO","level":2}
+{"timestamp":"2026-10-09 15:38:03.029","source":"Database.js:159","message":"[Database] Db initialized with models: user, session, apiKey, library, libraryFolder, book, podcast, podcastEpisode, libraryItem, mediaProgress, series, bookSeries, author, bookAuthor, collection, collectionBook, playlist, playlistMediaItem, device, playbackSession, feed, feedEpisode, setting, customMetadataProvider, mediaItemShare","levelName":"INFO","level":2}
+{"timestamp":"2026-10-09 15:38:03.048","source":"Database.js:162","message":"[Database] running ANALYZE","levelName":"INFO","level":2}
+{"timestamp":"2026-10-09 15:38:03.062","source":"Database.js:164","message":"[Database] ANALYZE completed","levelName":"INFO","level":2}
+{"timestamp":"2026-10-09 15:38:03.062","source":"Server.js:153","message":"[Server] Serving from base path \"/audiobookshelf\"","levelName":"INFO","level":2}
+{"timestamp":"2026-10-09 15:38:03.063","source":"LogManager.js:59","message":"[LogManager] Init current daily log filename: 2026-10-09.txt","levelName":"INFO","level":2}
+{"timestamp":"2026-10-09 15:38:03.069","source":"BackupManager.js:288","message":"[BackupManager] 0 Backups Found","levelName":"INFO","level":2}
+{"timestamp":"2026-10-09 15:38:03.069","source":"BackupManager.js:64","message":"[BackupManager] Auto Backups are disabled","levelName":"INFO","level":2}
+{"timestamp":"2026-10-09 15:38:03.083","source":"Server.js:410","message":"Listening on port :80","levelName":"INFO","level":2}
+{"timestamp":"2026-10-09 15:38:07.108","source":"SocketAuthority.js:166","message":"[SocketAuthority] Socket Connected to /audiobookshelf/socket.io fhSF15gtt5dYB-bzAAAB","levelName":"INFO","level":2}
+{"timestamp":"2026-10-09 15:45:00.619","source":"SocketAuthority.js:204","message":"[SocketAuthority] Socket fhSF15gtt5dYB-bzAAAB disconnected from client \"kieran\" after 413512ms (Reason: transport close)","levelName":"INFO","level":2}
+{"timestamp":"2026-10-09 15:45:01.147","source":"SocketAuthority.js:166","message":"[SocketAuthority] Socket Connected to /audiobookshelf/socket.io DYJPPRl2FPTj2W5GAAAD","levelName":"INFO","level":2}
+{"timestamp":"2026-10-09 15:45:46.119","source":"SocketAuthority.js:204","message":"[SocketAuthority] Socket DYJPPRl2FPTj2W5GAAAD disconnected from client \"kieran\" after 44973ms (Reason: ping timeout)","levelName":"INFO","level":2}
+{"timestamp":"2026-10-09 15:55:02.318","source":"SocketAuthority.js:166","message":"[SocketAuthority] Socket Connected to /audiobookshelf/socket.io JbwisFiaq09L-EtWAAAF","levelName":"INFO","level":2}
+{"timestamp":"2026-10-09 15:55:47.307","source":"SocketAuthority.js:204","message":"[SocketAuthority] Socket JbwisFiaq09L-EtWAAAF disconnected from client \"kieran\" after 44989ms (Reason: ping timeout)","levelName":"INFO","level":2}
+{"timestamp":"2026-10-09 16:10:46.749","source":"SocketAuthority.js:166","message":"[SocketAuthority] Socket Connected to /audiobookshelf/socket.io X5H4ueWeyhKfsPsfAAAH","levelName":"INFO","level":2}
+{"timestamp":"2026-10-09 16:11:56.870","source":"SocketAuthority.js:204","message":"[SocketAuthority] Socket X5H4ueWeyhKfsPsfAAAH disconnected from client \"kieran\" after 70121ms (Reason: ping timeout)","levelName":"INFO","level":2}
+{"timestamp":"2026-10-09 16:26:19.507","source":"SocketAuthority.js:166","message":"[SocketAuthority] Socket Connected to /audiobookshelf/socket.io XcPVujc3fB1GXOtnAAAJ","levelName":"INFO","level":2}
+{"timestamp":"2026-10-09 16:27:04.492","source":"SocketAuthority.js:204","message":"[SocketAuthority] Socket XcPVujc3fB1GXOtnAAAJ disconnected from client \"kieran\" after 44985ms (Reason: ping timeout)","levelName":"INFO","level":2}
+{"timestamp":"2026-10-09 16:41:39.666","source":"SocketAuthority.js:166","message":"[SocketAuthority] Socket Connected to /audiobookshelf/socket.io Q1iKWvPkGoylLLM_AAAL","levelName":"INFO","level":2}
+{"timestamp":"2026-10-09 16:41:39.680","source":"SocketAuthority.js:279","message":"Cannot validate socket - token expired","levelName":"ERROR","level":4}
+{"timestamp":"2026-10-09 16:42:24.629","source":"SocketAuthority.js:197","message":"[SocketAuthority] Unauth socket Q1iKWvPkGoylLLM_AAAL disconnected (Reason: ping timeout)","levelName":"INFO","level":2}
+{"timestamp":"2026-10-09 17:01:36.710","source":"SocketAuthority.js:166","message":"[SocketAuthority] Socket Connected to /audiobookshelf/socket.io k-A0eCJ_0fkad8GtAAAN","levelName":"INFO","level":2}
+{"timestamp":"2026-10-09 17:01:36.720","source":"SocketAuthority.js:279","message":"Cannot validate socket - token expired","levelName":"ERROR","level":4}
+{"timestamp":"2026-10-09 17:02:21.699","source":"SocketAuthority.js:197","message":"[SocketAuthority] Unauth socket k-A0eCJ_0fkad8GtAAAN disconnected (Reason: ping timeout)","levelName":"INFO","level":2}
+{"timestamp":"2026-10-09 17:15:52.337","source":"SocketAuthority.js:166","message":"[SocketAuthority] Socket Connected to /audiobookshelf/socket.io CZdiXo5H1ld-IVATAAAP","levelName":"INFO","level":2}
+{"timestamp":"2026-10-09 17:15:52.346","source":"SocketAuthority.js:279","message":"Cannot validate socket - token expired","levelName":"ERROR","level":4}
+{"timestamp":"2026-10-09 17:19:32.784","source":"SocketAuthority.js:197","message":"[SocketAuthority] Unauth socket CZdiXo5H1ld-IVATAAAP disconnected (Reason: ping timeout)","levelName":"INFO","level":2}
+{"timestamp":"2026-10-09 17:35:53.240","source":"SocketAuthority.js:166","message":"[SocketAuthority] Socket Connected to /audiobookshelf/socket.io cElFztZ_VibEFVEWAAAR","levelName":"INFO","level":2}
+{"timestamp":"2026-10-09 17:35:53.251","source":"SocketAuthority.js:279","message":"Cannot validate socket - token expired","levelName":"ERROR","level":4}
+{"timestamp":"2026-10-09 17:36:38.230","source":"SocketAuthority.js:197","message":"[SocketAuthority] Unauth socket cElFztZ_VibEFVEWAAAR disconnected (Reason: ping timeout)","levelName":"INFO","level":2}
+{"timestamp":"2026-10-09 17:46:02.898","source":"SocketAuthority.js:166","message":"[SocketAuthority] Socket Connected to /audiobookshelf/socket.io X4YpgamN6GdXc0XdAAAT","levelName":"INFO","level":2}
+{"timestamp":"2026-10-09 17:46:02.911","source":"SocketAuthority.js:279","message":"Cannot validate socket - token expired","levelName":"ERROR","level":4}
+{"timestamp":"2026-10-09 17:46:47.885","source":"SocketAuthority.js:197","message":"[SocketAuthority] Unauth socket X4YpgamN6GdXc0XdAAAT disconnected (Reason: ping timeout)","levelName":"INFO","level":2}
+{"timestamp":"2026-10-09 18:11:41.492","source":"SocketAuthority.js:166","message":"[SocketAuthority] Socket Connected to /audiobookshelf/socket.io DrsdyWMK7FLLY3_aAAAV","levelName":"INFO","level":2}
+{"timestamp":"2026-10-09 18:11:41.502","source":"SocketAuthority.js:279","message":"Cannot validate socket - token expired","levelName":"ERROR","level":4}
+{"timestamp":"2026-10-09 18:12:26.476","source":"SocketAuthority.js:197","message":"[SocketAuthority] Unauth socket DrsdyWMK7FLLY3_aAAAV disconnected (Reason: ping timeout)","levelName":"INFO","level":2}
+{"timestamp":"2026-10-09 18:27:08.074","source":"SocketAuthority.js:166","message":"[SocketAuthority] Socket Connected to /audiobookshelf/socket.io DVH2yMdZqzU3lQqAAAAX","levelName":"INFO","level":2}
+{"timestamp":"2026-10-09 18:27:08.083","source":"SocketAuthority.js:279","message":"Cannot validate socket - token expired","levelName":"ERROR","level":4}
+{"timestamp":"2026-10-09 18:27:53.064","source":"SocketAuthority.js:197","message":"[SocketAuthority] Unauth socket DVH2yMdZqzU3lQqAAAAX disconnected (Reason: ping timeout)","levelName":"INFO","level":2}
+{"timestamp":"2026-10-09 18:37:18.121","source":"SocketAuthority.js:166","message":"[SocketAuthority] Socket Connected to /audiobookshelf/socket.io q9iLbnV6UY4Y41X5AAAZ","levelName":"INFO","level":2}
+{"timestamp":"2026-10-09 18:37:18.145","source":"SocketAuthority.js:279","message":"Cannot validate socket - token expired","levelName":"ERROR","level":4}
+{"timestamp":"2026-10-09 18:54:48.301","source":"SocketAuthority.js:197","message":"[SocketAuthority] Unauth socket q9iLbnV6UY4Y41X5AAAZ disconnected (Reason: transport close)","levelName":"INFO","level":2}
+{"timestamp":"2026-10-09 18:54:49.785","source":"SocketAuthority.js:166","message":"[SocketAuthority] Socket Connected to /audiobookshelf/socket.io cYvf95TNolbqvan8AAAb","levelName":"INFO","level":2}
+{"timestamp":"2026-10-09 18:54:49.794","source":"SocketAuthority.js:279","message":"Cannot validate socket - token expired","levelName":"ERROR","level":4}
+{"timestamp":"2026-10-09 18:55:34.775","source":"SocketAuthority.js:197","message":"[SocketAuthority] Unauth socket cYvf95TNolbqvan8AAAb disconnected (Reason: ping timeout)","levelName":"INFO","level":2}
+{"timestamp":"2026-10-09 19:04:51.819","source":"SocketAuthority.js:166","message":"[SocketAuthority] Socket Connected to /audiobookshelf/socket.io 46egWrsPhvP-OoZEAAAd","levelName":"INFO","level":2}
+{"timestamp":"2026-10-09 19:04:51.829","source":"SocketAuthority.js:279","message":"Cannot validate socket - token expired","levelName":"ERROR","level":4}
+{"timestamp":"2026-10-09 19:06:36.448","source":"SocketAuthority.js:197","message":"[SocketAuthority] Unauth socket 46egWrsPhvP-OoZEAAAd disconnected (Reason: ping timeout)","levelName":"INFO","level":2}
+{"timestamp":"2026-10-09 19:18:04.523","source":"SocketAuthority.js:166","message":"[SocketAuthority] Socket Connected to /audiobookshelf/socket.io HpC7b2RQ2eh0rPR_AAAf","levelName":"INFO","level":2}
+{"timestamp":"2026-10-09 19:18:04.536","source":"SocketAuthority.js:279","message":"Cannot validate socket - token expired","levelName":"ERROR","level":4}
+{"timestamp":"2026-10-09 19:18:08.861","source":"SocketAuthority.js:197","message":"[SocketAuthority] Unauth socket HpC7b2RQ2eh0rPR_AAAf disconnected (Reason: transport close)","levelName":"INFO","level":2}
+{"timestamp":"2026-10-09 19:18:10.809","source":"SocketAuthority.js:166","message":"[SocketAuthority] Socket Connected to /audiobookshelf/socket.io xLCRICKG2liwy6M-AAAh","levelName":"INFO","level":2}
+{"timestamp":"2026-10-09 19:18:10.818","source":"SocketAuthority.js:279","message":"Cannot validate socket - token expired","levelName":"ERROR","level":4}
+{"timestamp":"2026-10-09 19:18:55.797","source":"SocketAuthority.js:197","message":"[SocketAuthority] Unauth socket xLCRICKG2liwy6M-AAAh disconnected (Reason: ping timeout)","levelName":"INFO","level":2}
+{"timestamp":"2026-10-09 19:35:50.333","source":"SocketAuthority.js:166","message":"[SocketAuthority] Socket Connected to /audiobookshelf/socket.io -owvUG-o6FLEG6ISAAAj","levelName":"INFO","level":2}
+{"timestamp":"2026-10-09 19:35:50.344","source":"SocketAuthority.js:279","message":"Cannot validate socket - token expired","levelName":"ERROR","level":4}
+{"timestamp":"2026-10-09 19:39:30.739","source":"SocketAuthority.js:197","message":"[SocketAuthority] Unauth socket -owvUG-o6FLEG6ISAAAj disconnected (Reason: ping timeout)","levelName":"INFO","level":2}
+{"timestamp":"2026-10-09 19:52:15.984","source":"SocketAuthority.js:166","message":"[SocketAuthority] Socket Connected to /audiobookshelf/socket.io kqfqGkBb87Dn485SAAAl","levelName":"INFO","level":2}
+{"timestamp":"2026-10-09 19:52:15.991","source":"SocketAuthority.js:279","message":"Cannot validate socket - token expired","levelName":"ERROR","level":4}
+{"timestamp":"2026-10-09 19:53:00.975","source":"SocketAuthority.js:197","message":"[SocketAuthority] Unauth socket kqfqGkBb87Dn485SAAAl disconnected (Reason: ping timeout)","levelName":"INFO","level":2}
+{"timestamp":"2026-10-09 20:02:19.650","source":"SocketAuthority.js:166","message":"[SocketAuthority] Socket Connected to /audiobookshelf/socket.io GtoomDEcz4d-Luu7AAAn","levelName":"INFO","level":2}
+{"timestamp":"2026-10-09 20:02:19.662","source":"SocketAuthority.js:279","message":"Cannot validate socket - token expired","levelName":"ERROR","level":4}
+{"timestamp":"2026-10-09 20:32:28.061","source":"SocketAuthority.js:166","message":"[SocketAuthority] Socket Connected to /audiobookshelf/socket.io aAA0ZR8zSLdSU-ReAAAp","levelName":"INFO","level":2}
+{"timestamp":"2026-10-09 20:32:53.356","source":"SocketAuthority.js:197","message":"[SocketAuthority] Unauth socket GtoomDEcz4d-Luu7AAAn disconnected (Reason: transport close)","levelName":"INFO","level":2}
+{"timestamp":"2026-10-09 20:32:53.356","source":"SocketAuthority.js:204","message":"[SocketAuthority] Socket aAA0ZR8zSLdSU-ReAAAp disconnected from client \"kieran\" after 25295ms (Reason: transport close)","levelName":"INFO","level":2}

@@ -1,0 +1,49 @@
+services:
+  paseo:
+    container_name: paseo
+    image: paseo-custom:latest
+    # Child image (see ./Dockerfile) adding gh and agent CLIs the base image
+    # doesn't ship. Rebuild manually: docker compose build && docker compose up -d
+    build:
+      context: .
+    restart: always
+    # The image entrypoint does first-run volume setup, then drops to the
+    # non-root "paseo" user (uid/gid 1000). The command below reads the
+    # password from the agenix secret and starts the daemon with the
+    # bundled web UI (the entrypoint's default behavior, minus the
+    # plaintext env var).
+    command:
+      - /bin/sh
+      - -c
+      - |
+        export PASEO_PASSWORD="$$(cat /run/secrets/paseo-password)"
+        exec node "$$(cat /etc/paseo-server-entry)"
+    environment:
+      # Required when reached via DNS name, otherwise the daemon 403s.
+      # "homeserver" is the Tailscale MagicDNS name used for direct
+      # connections (phone app / browsers on the tailnet). IPs and localhost
+      # are allowed by default.
+      - PASEO_HOSTNAMES=paseo.kfreitag.ca,homeserver
+      # Caddy forwards from the docker network (not loopback), so the daemon
+      # must trust it to honor X-Forwarded-Proto; otherwise the web UI
+      # computes a ws:// connect-back URL and the browser blocks it as mixed
+      # content -> "no host connected".
+      - PASEO_TRUSTED_PROXIES=172.18.0.0/16
+    ports:
+      # Publish for direct connections (mobile app / CLI / Tailscale);
+      # PASEO_PASSWORD is required for any published port.
+      - "6767:6767"
+    volumes:
+      - ./data:/home/paseo
+      - ./workspace:/workspace
+      - /run/agenix/paseo-password:/run/secrets/paseo-password:ro
+    networks:
+      - caddy_network
+    labels:
+      caddy: paseo.kfreitag.ca
+      caddy.reverse_proxy: "{{upstreams 6767}}"
+      caddy.import: tinyauth_forwarder *
+
+networks:
+  caddy_network:
+    external: true

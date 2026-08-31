@@ -20,6 +20,7 @@ let
     "simple-gym-pass" = personal;
     "simple-gym-oidc-client-secret" = personal;
     "paperless-oidc-client-secret" = personal;
+    "paseo-password" = personal;
     "hoser-shop-api-secret" = personal;
     "open-webui-oidc-client-secret" = personal;
     "restic-b2-env" = personal;

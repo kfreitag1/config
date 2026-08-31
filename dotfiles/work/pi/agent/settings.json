@@ -1,12 +1,21 @@
 {
-  "npmCommand": ["pnpm"],
-  "lastChangelogVersion": "0.75.3",
-  "defaultProvider": "openai",
-  "defaultModel": "gpt-5.5",
-  "compaction": {
-    "enabled": false
-  },
-  "defaultThinkingLevel": "xhigh",
+  "defaultModel": "fireworks:accounts/fireworks/models/kimi-k3",
+  "defaultProvider": "fireworks",
+  "npmCommand": [
+    "pnpm"
+  ],
+  "lastChangelogVersion": "0.84.3",
+  "defaultThinkingLevel": "high",
   "theme": "dark",
-  "packages": ["git:github.com/shopify-playground/shop-pi-fy"]
+  "enabledModels": [
+    "fireworks/fireworks:accounts/fireworks/models/kimi-k3",
+    "fireworks/fireworks:accounts/fireworks/models/deepseek-v4-pro-0813",
+    "fireworks/glm-5.2",
+    "fireworks/qwen3.8-max",
+    "anthropic/claude-opus-5",
+    "anthropic/claude-fable-5",
+    "openai-1m/gpt-5.6-sol",
+    "openai-1m/gpt-5.6-terra",
+    "openai-1m/gpt-5.6-luna"
+  ]
 }

@@ -27,6 +27,10 @@ let
     ${docker} exec uptime-kuma sh -c 'mariadb-dump --socket=/app/data/run/mariadb.sock --single-transaction --databases kuma' > ${dumpDir}/uptime-kuma-mariadb.sql
     ${gzip} -f ${dumpDir}/uptime-kuma-mariadb.sql
 
+    # --- PostgreSQL (bookorbit) ---
+    ${docker} exec bookorbit-db sh -c 'pg_dumpall -U "$POSTGRES_USER" --clean --if-exists' > ${dumpDir}/bookorbit-pg.sql
+    ${gzip} -f ${dumpDir}/bookorbit-pg.sql
+
     # --- SQLite (consistent online .backup) ---
     ${sqlite} /home/kieran/config/hosts/homeserver/docker/paperless/data/db.sqlite3 ".backup ${dumpDir}/paperless.db"
     ${sqlite} /home/kieran/config/hosts/homeserver/docker/pocket-id/data/pocket-id.db ".backup ${dumpDir}/pocket-id.db"
@@ -73,6 +77,7 @@ in
       "/home/kieran/config/hosts/homeserver/docker/immich/postgres"
       "/home/kieran/config/hosts/homeserver/docker/simple-gym/data"
       "/home/kieran/config/hosts/homeserver/docker/uptime-kuma/data/mariadb"
+      "/home/kieran/config/hosts/homeserver/docker/bookorbit/data/postgres"
       "/home/kieran/config/hosts/homeserver/docker/arr/**/*.db*"
       "/home/kieran/config/hosts/homeserver/docker/paperless/data/db.sqlite3*"
       "/home/kieran/config/hosts/homeserver/docker/pocket-id/data/pocket-id.db*"

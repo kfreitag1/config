@@ -19,12 +19,6 @@
       options = [ "defaults" "nofail" ];
     };
 
-    "/mnt/backup" = {
-      device = "/dev/disk/by-uuid/9f22ca6a-8429-478f-90f2-cfbd123bdc75";
-      fsType = "ext4";
-      options = [ "defaults" "nofail" ];
-    };
-
     "/mnt/cache" = {
       device = "/dev/disk/by-uuid/ed80a085-8429-43e2-ad5e-1e0ccdbfa508";
       fsType = "xfs";

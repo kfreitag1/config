@@ -1,0 +1,17 @@
+services:
+    uptime-kuma:
+        image: louislam/uptime-kuma:2
+        container_name: uptime-kuma
+        restart: always
+        volumes:
+            - ./data:/app/data
+        labels:
+            caddy: status.kfreitag.ca
+            caddy.reverse_proxy: "{{upstreams 3001}}"
+            caddy.import: tinyauth_forwarder *
+        networks:
+            - caddy_network
+
+networks:
+    caddy_network:
+        external: true

@@ -1,0 +1,97 @@
+---
+# For configuration options and examples, please see:
+# https://gethomepage.dev/configs/services/
+
+- Media:
+      - Jellyfin:
+            href: https://watch.kfreitag.ca
+            icon: jellyfin
+            description: Movies & TV
+      - Jellyseerr:
+            href: https://request.kfreitag.ca
+            icon: jellyseerr
+            description: Media requests
+      - Immich:
+            href: https://photos.kfreitag.ca
+            icon: immich
+            description: Photos
+      - Booklore:
+            href: https://library.kfreitag.ca
+            icon: booklore
+            description: E-books
+
+- Automation:
+      - Sonarr:
+            href: https://sonarr.kfreitag.ca
+            icon: sonarr
+            description: TV
+      - Radarr:
+            href: https://radarr.kfreitag.ca
+            icon: radarr
+            description: Movies
+      - Lidarr:
+            href: https://lidarr.kfreitag.ca
+            icon: lidarr
+            description: Music
+      - Prowlarr:
+            href: https://prowlarr.kfreitag.ca
+            icon: prowlarr
+            description: Indexers
+      - Bazarr:
+            href: https://bazarr.kfreitag.ca
+            icon: bazarr
+            description: Subtitles
+      - SABnzbd:
+            href: https://sabnzbd.kfreitag.ca
+            icon: sabnzbd
+            description: Downloads
+
+- Productivity:
+      - Paperless:
+            href: https://docs.kfreitag.ca
+            icon: paperless
+            description: Documents
+      - Actual Budget:
+            href: https://budget.kfreitag.ca
+            icon: actual-budget
+            description: Finances
+      - Obsidian LiveSync:
+            href: https://obsidian-livesync.kfreitag.ca
+            icon: si-obsidian
+            description: Notes sync
+
+- Apps:
+      - Simple Gym:
+            href: https://gym.kfreitag.ca
+            description: Fitness
+      - Hoser Shop Admin:
+            href: https://hoser-shop-admin.kfreitag.ca
+            icon: si-shopify
+            description: Shopify admin
+
+- AI:
+      - Open WebUI:
+            href: https://chat.kfreitag.ca
+            icon: open-webui
+            description: LLM chat
+
+- System:
+      - Homepage:
+            href: https://dash.kfreitag.ca
+            icon: homepage
+            description: This dashboard
+      - Uptime Kuma:
+            href: https://status.kfreitag.ca
+            icon: uptime-kuma
+            description: Service status
+      - Dockhand:
+            href: https://containers.kfreitag.ca
+            icon: docker
+            description: Containers
+      - Pocket ID:
+            href: https://id.kfreitag.ca
+            icon: pocket-id
+            description: SSO identity
+      - tinyauth:
+            href: https://auth.kfreitag.ca
+            description: SSO gateway

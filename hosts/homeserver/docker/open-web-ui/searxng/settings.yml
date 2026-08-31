@@ -1,0 +1,15 @@
+use_default_settings: true
+
+server:
+  # Generated with: head -c 32 /dev/urandom | od -An -tx1 | tr -d ' \n'
+  secret_key: "b5ba2ee34f02c4c0b583c8415fc72d433c3e7f7b0f6e2d57245bef1964d18d36"
+  # Open WebUI authenticates directly on the private docker network,
+  # so the rate limiter / bot detection must stay off.
+  limiter: false
+  image_proxy: true
+
+search:
+  # Open WebUI queries SearXNG via its JSON API, which is disabled by default.
+  formats:
+    - html
+    - json

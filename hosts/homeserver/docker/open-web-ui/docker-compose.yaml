@@ -1,0 +1,50 @@
+services:
+  openwebui:
+    image: ghcr.io/open-webui/open-webui:main
+    restart: unless-stopped
+    volumes:
+      - ./data:/app/backend/data
+      - /run/agenix/open-webui-oidc-client-secret:/run/secrets/open-webui-oidc-client-secret:ro
+    command:
+      - sh
+      - -c
+      - |
+        export OAUTH_CLIENT_SECRET="$$(cat /run/secrets/open-webui-oidc-client-secret)"
+        export WEBUI_SECRET_KEY="$$(cat /run/secrets/open-webui-oidc-client-secret)"
+        exec bash start.sh
+    labels:
+      caddy: chat.kfreitag.ca
+      caddy.reverse_proxy: "{{upstreams 8080}}"
+    environment:
+      - WEBUI_URL=https://chat.kfreitag.ca
+      - OAUTH_CLIENT_ID=1a86fc68-aae9-46d3-9369-f9ae017fde59
+      - OPENID_PROVIDER_URL=https://id.kfreitag.ca/.well-known/openid-configuration
+      - OAUTH_PROVIDER_NAME=Rhodhouse ID
+      - OAUTH_AUTO_REDIRECT=true
+      - OAUTH_UPDATE_PICTURE_ON_LOGIN=true
+      - ENABLE_OAUTH_SIGNUP=true
+      - ENABLE_SIGNUP=false
+      # Web search via SearXNG
+      - RAG_WEB_SEARCH_ENGINE=searxng
+      - SEARXNG_QUERY_URL=http://searxng:8080/search?q=<query>
+    networks:
+      - caddy_network
+      - default
+
+  searxng:
+    image: docker.io/searxng/searxng:latest
+    restart: unless-stopped
+    volumes:
+      - ./searxng:/etc/searxng:rw
+    environment:
+      - SEARXNG_BASE_URL=http://searxng:8080
+    cap_drop:
+      - ALL
+    cap_add:
+      - CHOWN
+      - SETGID
+      - SETUID
+
+networks:
+  caddy_network:
+    external: true

@@ -17,6 +17,13 @@ services:
       - -c
       - |
         export PASEO_PASSWORD="$$(cat /run/secrets/paseo-password)"
+        # gh API auth (replaces interactive `gh auth login`). Needs a PAT
+        # with repo scope for private repos / PR features.
+        export GH_TOKEN="$$(cat /run/secrets/github-token)"
+        # Let gh act as git's credential helper for private clone/push
+        gh auth setup-git >/dev/null 2>&1 || true
+        # Pi provider credentials (agenix)
+        export OPENROUTER_API_KEY="$$(cat /run/secrets/openrouter-api-key)"
         exec node "$$(cat /etc/paseo-server-entry)"
     environment:
       # Required when reached via DNS name, otherwise the daemon 403s.
@@ -37,6 +44,8 @@ services:
       - ./data:/home/paseo
       - ./workspace:/workspace
       - /run/agenix/paseo-password:/run/secrets/paseo-password:ro
+      - /run/agenix/github-token:/run/secrets/github-token:ro
+      - /run/agenix/openrouter-api-key:/run/secrets/openrouter-api-key:ro
     networks:
       - caddy_network
     labels:

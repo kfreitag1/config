@@ -172,41 +172,6 @@
     };
   };
 
-  services.home-assistant = {
-    enable = true;
-    extraComponents = [
-      "analytics"
-      "met"
-      "radio_browser"
-      "isal"
-      "matter"
-      "mobile_app"
-      "thread"
-      "otbr"
-      "homekit"
-    ];
-    config = {
-      default_config = {};
-      http = {
-        use_x_forwarded_for = true;
-        trusted_proxies = [ "172.16.0.0/12" ];
-      };
-      "automation ui" = "!include automations.yaml";
-      "script ui" = "!include scripts.yaml";
-      "scene ui" = "!include scenes.yaml";
-    };
-  };
-
-  services.matter-server = {
-    enable = true;
-  };
-
-  systemd.tmpfiles.rules = [
-    "f /var/lib/hass/automations.yaml 0644 hass hass"
-    "f /var/lib/hass/scripts.yaml 0644 hass hass"
-    "f /var/lib/hass/scenes.yaml 0644 hass hass"
-  ];
-
   networking.firewall.enable = true;
   networking.firewall.trustedInterfaces = [ "tailscale0" ];
   networking.firewall.allowedTCPPorts = [ 22 80 443 8123 21063 21064 ];

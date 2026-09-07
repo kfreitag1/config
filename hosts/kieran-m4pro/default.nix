@@ -48,6 +48,7 @@ in
       "anki"
       "the-unarchiver"
       "dbeaver-community"
+      "utm"
     ];
     brews = [
       "openfst"

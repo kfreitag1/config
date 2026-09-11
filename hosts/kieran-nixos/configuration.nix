@@ -162,16 +162,6 @@ in
   security.polkit.enable = true;
   hardware.apple-t2.enableIGPU = true;
 
-  environment.etc."niri/default-config.kdl".source = pkgs.writeText "niri-default-config.kdl" (
-    lib.replaceStrings
-      [
-        ''// This line starts waybar, a commonly used bar for Wayland compositors.\n''
-        ''spawn-at-startup "waybar"\n''
-      ]
-      [ "" "" ]
-      (builtins.readFile "${config.programs.niri.package.src}/resources/default-config.kdl")
-  );
-
   services.keyd = {
     enable = true;
     keyboards.default = {

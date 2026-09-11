@@ -1,5 +1,6 @@
 {
-  "lastChangelogVersion": "0.73.1",
+  "lastChangelogVersion": "0.83.0",
   "defaultProvider": "openrouter",
-  "defaultModel": "deepseek/deepseek-v4.1-flash"
+  "defaultModel": "deepseek/deepseek-v4.1-flash",
+  "theme": "dark"
 }

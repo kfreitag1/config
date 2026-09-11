@@ -72,14 +72,14 @@ in
   };
 
   services.udev.extraHwdb = ''
-    touchpad:usb:v05acp0340:*
+    touchpad:usb:v05acp0280:*
      ID_INPUT_TOUCHPAD_INTEGRATION=internal
   '';
 
   environment.etc."libinput/local-overrides.quirks".text = ''
     [Apple Internal Trackpad (T2)]
     MatchVendor=0x05AC
-    MatchProduct=0x0340
+    MatchProduct=0x0280
     MatchUdevType=touchpad
     AttrPalmSizeThreshold=1200
   '';

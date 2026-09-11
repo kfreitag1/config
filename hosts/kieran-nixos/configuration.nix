@@ -33,6 +33,19 @@ let
       done < <(niri msg --json event-stream)
     '';
   };
+
+  swaybgBackdrop = pkgs.swaybg.overrideAttrs (prev: {
+    pname = "swaybg-backdrop";
+    postPatch = ''
+      substituteInPlace main.c --replace-fail '"wallpaper"' '"wallpaper-backdrop"'
+    '';
+  });
+
+  blurredWallpaper = pkgs.runCommand "cat_wallpaper-blur.png" {
+    nativeBuildInputs = [ pkgs.ffmpeg-headless ];
+  } ''
+    ffmpeg -hide_banner -loglevel error -y -i ${../../dotfiles/base/wallpapers/cat_wallpaper.png} -vf gblur=sigma=40 -frames:v 1 $out
+  '';
 in
 {
   environment.variables.MACHINE_PROFILE = "personal";
@@ -95,6 +108,18 @@ in
     wantedBy = [ "graphical-session.target" ];
     serviceConfig = {
       ExecStart = "${pkgs.swaybg}/bin/swaybg -m fill -i %h/.config/wallpapers/cat_wallpaper.png";
+      Restart = "on-failure";
+      RestartSec = 2;
+    };
+  };
+
+  systemd.user.services.swaybg-backdrop = {
+    description = "Blurred wallpaper for the niri overview backdrop";
+    after = [ "graphical-session.target" ];
+    partOf = [ "graphical-session.target" ];
+    wantedBy = [ "graphical-session.target" ];
+    serviceConfig = {
+      ExecStart = "${swaybgBackdrop}/bin/swaybg -m fill -i ${blurredWallpaper}";
       Restart = "on-failure";
       RestartSec = 2;
     };

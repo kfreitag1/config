@@ -40,6 +40,11 @@ window-rule {
     }
 }
 
+layer-rule {
+    match namespace="^wallpaper-backdrop$"
+    place-within-backdrop true
+}
+
 overview {
     backdrop-color "#181818"
     zoom 0.5

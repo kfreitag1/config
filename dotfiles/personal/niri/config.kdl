@@ -3,6 +3,8 @@ include "/etc/niri/default-config.kdl"
 prefer-no-csd
 
 input {
+    disable-power-key-handling
+
     keyboard {
         repeat-delay 150
         repeat-rate 33
@@ -39,7 +41,7 @@ binds {
     Mod+X { spawn "noctalia" "msg" "panel-toggle" "session"; }
     Mod+Shift+V { spawn "noctalia" "msg" "panel-toggle" "clipboard"; }
     Mod+Shift+Comma { spawn "noctalia" "msg" "settings-toggle"; }
-    Super+Alt+L { spawn "noctalia" "msg" "session" "lock"; }
+    XF86PowerOff { spawn "hyprlock"; }
     XF86AudioRaiseVolume allow-when-locked=true { spawn "noctalia" "msg" "volume-up"; }
     XF86AudioLowerVolume allow-when-locked=true { spawn "noctalia" "msg" "volume-down"; }
     XF86AudioMute allow-when-locked=true { spawn "noctalia" "msg" "volume-mute"; }

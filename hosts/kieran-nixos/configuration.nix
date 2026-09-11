@@ -49,6 +49,10 @@ in
     recommendedServices.enable = true;
   };
 
+  services.logind.settings.Login.HandlePowerKey = "ignore";
+
+  security.pam.services.hyprlock = { };
+
   xdg.mime.defaultApplications = {
     "inode/directory" = "org.gnome.Nautilus.desktop";
     "x-scheme-handler/http" = "google-chrome.desktop";
@@ -121,6 +125,7 @@ in
     restic
     ghostty
     fuzzel
+    hyprlock
     nautilus
     google-chrome
     xwayland-satellite

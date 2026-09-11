@@ -1,0 +1,4 @@
+config_version = 8
+
+[accessibility]
+ui_scale = 1.0

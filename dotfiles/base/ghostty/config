@@ -10,7 +10,6 @@ quick-terminal-position = center
 quick-terminal-animation-duration = 0
 quick-terminal-size = 90%,90%
 keybind = global:cmd+backquote=toggle_quick_terminal
-maximize = true
 confirm-close-surface = false
 quick-terminal-space-behavior = remain
 bell-features = no-attention, no-title

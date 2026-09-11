@@ -10,6 +10,10 @@ in
       sourceDir = ../../dotfiles/personal;
       checkout = "${repoRoot}/dotfiles/personal";
     }
+    {
+      sourceDir = ../../dotfiles/kieran-nixos;
+      checkout = "${repoRoot}/dotfiles/kieran-nixos";
+    }
   ];
 
   # Wifi
@@ -38,6 +42,21 @@ in
 
   # Niri + graphics config
   programs.niri.enable = true;
+
+  programs.noctalia = {
+    enable = true;
+    systemd.enable = true;
+    recommendedServices.enable = true;
+  };
+
+  xdg.mime.defaultApplications = {
+    "inode/directory" = "org.gnome.Nautilus.desktop";
+    "x-scheme-handler/http" = "google-chrome.desktop";
+    "x-scheme-handler/https" = "google-chrome.desktop";
+    "text/html" = "google-chrome.desktop";
+    "application/xhtml+xml" = "google-chrome.desktop";
+  };
+
   security.polkit.enable = true;
   hardware.apple-t2.enableIGPU = true;
 
@@ -100,8 +119,10 @@ in
     go
     pi-coding-agent
     restic
-    alacritty
+    ghostty
     fuzzel
+    nautilus
+    google-chrome
     xwayland-satellite
   ];
 

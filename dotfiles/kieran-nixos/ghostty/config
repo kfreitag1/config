@@ -1,0 +1,17 @@
+theme = Catppuccin Mocha
+background = #181818
+mouse-hide-while-typing = true
+font-size = 11
+shell-integration-features = ssh-terminfo,ssh-env
+macos-titlebar-proxy-icon = hidden
+title = " "
+macos-icon = retro
+quick-terminal-position = center
+quick-terminal-animation-duration = 0
+quick-terminal-size = 90%,90%
+keybind = global:cmd+backquote=toggle_quick_terminal
+confirm-close-surface = false
+quick-terminal-space-behavior = remain
+bell-features = no-attention, no-title
+macos-hidden = always
+background-opacity = 1.00

@@ -44,6 +44,7 @@
       tmux
       jq
       fzf
+      yazi
       starship
 
       # External dependencies required by kickstart.nvim

@@ -45,8 +45,20 @@
       jq
       fzf
       starship
+
+      # External dependencies required by kickstart.nvim
+      ripgrep
+      fd
+      lazygit
+      tree-sitter
+      gnumake
+      gcc
+      unzip
+      curl
+      wget
+
       inputs.agenix.packages.${pkgs.stdenv.hostPlatform.system}.default
-    ];
+    ] ++ lib.optionals pkgs.stdenv.isLinux [ wl-clipboard ];
 
     programs.zsh.enable = true;
     programs.zsh.enableCompletion = true;

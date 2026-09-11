@@ -59,7 +59,6 @@ in
     brews = [
       "openfst"
       "openjdk"
-      "lazygit"
       "lazydocker"
       "pandoc"
       "shopify-cli"

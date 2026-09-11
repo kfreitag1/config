@@ -95,11 +95,9 @@ in
     mergerfs-tools
     sqlite
     radeontop
-    wget
     postgresql
     vim
     go
-    gcc
     pi-coding-agent
     restic
     alacritty

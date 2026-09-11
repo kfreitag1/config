@@ -57,9 +57,6 @@
       "pi-coding-agent"
       "skills"
       "herdr"
-      "tree-sitter-cli"
-      "ripgrep"
-      "fd"
       "restic"
     ];
     onActivation.cleanup = "zap";

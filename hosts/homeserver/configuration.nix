@@ -132,11 +132,9 @@
     mergerfs-tools
     sqlite
     radeontop
-    wget
     postgresql
     vim
     go
-    gcc
     pi-coding-agent
     restic
     (pkgs.writeShellScriptBin "caddy-reload" ''

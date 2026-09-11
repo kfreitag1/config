@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, ... }:
 let
   repoRoot = "${config.users.users.${config.kieran.primaryUser}.home}/config";
 in
@@ -20,10 +20,6 @@ in
 
   # nix-daemon is managed by tec, not nix-darwin
   nix.enable = false;
-
-  environment.systemPackages = with pkgs; [
-    lazygit
-  ];
 
   homebrew = {
     brews = [

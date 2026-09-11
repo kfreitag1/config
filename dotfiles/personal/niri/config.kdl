@@ -4,8 +4,8 @@ prefer-no-csd
 
 input {
     keyboard {
-        repeat-delay 120
-        repeat-rate 40
+        repeat-delay 150
+        repeat-rate 33
     }
     touchpad {
         dwt

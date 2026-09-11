@@ -57,7 +57,6 @@
       "pi-coding-agent"
       "skills"
       "herdr"
-      "git-delta"
       "tree-sitter-cli"
       "ripgrep"
       "fd"

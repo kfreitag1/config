@@ -40,6 +40,7 @@
     environment.systemPackages = with pkgs; [
       neovim
       git
+      delta
       tmux
       jq
       fzf

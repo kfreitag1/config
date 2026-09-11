@@ -29,6 +29,20 @@ layout {
 window-rule {
     geometry-corner-radius 12
     clip-to-geometry true
+    draw-border-with-background false
+}
+
+window-rule {
+    match app-id=r#"^com\.mitchellh\.ghostty$"#
+
+    background-effect {
+        blur true
+    }
+}
+
+overview {
+    backdrop-color "#181818"
+    zoom 0.5
 }
 
 binds {
@@ -36,15 +50,11 @@ binds {
     Mod+J { focus-workspace-down; }
     Mod+K { focus-workspace-up; }
 
-    Mod+D { spawn "noctalia" "msg" "panel-toggle" "launcher"; }
-    Mod+N { spawn "noctalia" "msg" "panel-toggle" "control-center"; }
-    Mod+X { spawn "noctalia" "msg" "panel-toggle" "session"; }
-    Mod+Shift+V { spawn "noctalia" "msg" "panel-toggle" "clipboard"; }
-    Mod+Shift+Comma { spawn "noctalia" "msg" "settings-toggle"; }
+    Mod+D { spawn "fuzzel"; }
     XF86PowerOff { spawn "hyprlock"; }
-    XF86AudioRaiseVolume allow-when-locked=true { spawn "noctalia" "msg" "volume-up"; }
-    XF86AudioLowerVolume allow-when-locked=true { spawn "noctalia" "msg" "volume-down"; }
-    XF86AudioMute allow-when-locked=true { spawn "noctalia" "msg" "volume-mute"; }
+    XF86AudioRaiseVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1+" "-l" "1.0"; }
+    XF86AudioLowerVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1-"; }
+    XF86AudioMute allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
 }
 
 hotkey-overlay {

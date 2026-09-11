@@ -1,0 +1,46 @@
+{
+  "layer": "top",
+  "position": "top",
+  "exclusive": false,
+  "start_hidden": true,
+  "on-sigusr1": "show",
+  "on-sigusr2": "hide",
+
+  "height": 32,
+  "spacing": 10,
+  "margin-top": 190,
+  "margin-left": 24,
+  "margin-right": 24,
+
+  "modules-center": ["clock"],
+  "modules-right": ["network", "battery"],
+
+  "clock": {
+    "format": "{:%a %d %b  %H:%M}",
+    "tooltip-format": "{:%Y-%m-%d %H:%M:%S}",
+    "interval": 1
+  },
+
+  "network": {
+    "format-wifi": "{essid} {signalStrength}%",
+    "format-ethernet": "{ifname}",
+    "format-disconnected": "offline",
+    "format-linked": "{ifname}",
+    "tooltip-format-wifi": "{essid} ({signalStrength}%)\n{ipaddr}/{cidr}",
+    "tooltip-format-ethernet": "{ifname}\n{ipaddr}/{cidr}",
+    "interval": 5
+  },
+
+  "battery": {
+    "format": "{capacity}%",
+    "format-charging": "{capacity}%+",
+    "format-plugged": "{capacity}%",
+    "format-full": "{capacity}%",
+    "tooltip-format": "{timeTo}",
+    "interval": 30,
+    "states": {
+      "warning": 20,
+      "critical": 10
+    }
+  }
+}

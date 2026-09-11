@@ -33,5 +33,11 @@
       modules = [ ./hosts/homeserver ];
       specialArgs = { inherit inputs; hostName = "homeserver"; };
     };
+
+    nixosConfigurations."kieran-nixos" = nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";
+      modules = [ ./hosts/kieran-nixos ];
+      specialArgs = { inherit inputs; hostName = "kieran-nixos"; };
+    };
   };
 }

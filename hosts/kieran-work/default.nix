@@ -1,16 +1,22 @@
 { config, pkgs, ... }:
 let
-  repoRoot = "${config.users.users.${config.system.primaryUser}.home}/config";
+  repoRoot = "${config.users.users.${config.kieran.primaryUser}.home}/config";
 in
 {
   imports = [ ../../modules/darwin.nix ];
 
   environment.variables.MACHINE_PROFILE = "work";
 
-  home-manager.users.kieran.kieran.dotfiles.overlay = {
-    sourceDir = ../../dotfiles/work;
-    checkout = "${repoRoot}/dotfiles/work";
-  };
+  home-manager.users.${config.kieran.primaryUser}.kieran.dotfiles.overlays = [
+    {
+      sourceDir = ../../dotfiles/work;
+      checkout = "${repoRoot}/dotfiles/work";
+    }
+    {
+      sourceDir = ../../dotfiles/darwin;
+      checkout = "${repoRoot}/dotfiles/darwin";
+    }
+  ];
 
   # nix-daemon is managed by tec, not nix-darwin
   nix.enable = false;

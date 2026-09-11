@@ -1,6 +1,8 @@
 { config, pkgs, lib, ... }:
 
 let
+  repoRoot = "${config.users.users.${config.kieran.primaryUser}.home}/config";
+
   dumpDir = "/mnt/cache/backup-dumps";
 
   docker = "${pkgs.docker}/bin/docker";
@@ -32,16 +34,16 @@ let
     ${gzip} -f ${dumpDir}/bookorbit-pg.sql
 
     # --- SQLite (consistent online .backup) ---
-    ${sqlite} /home/kieran/config/hosts/homeserver/docker/paperless/data/db.sqlite3 ".backup ${dumpDir}/paperless.db"
-    ${sqlite} /home/kieran/config/hosts/homeserver/docker/pocket-id/data/pocket-id.db ".backup ${dumpDir}/pocket-id.db"
-    ${sqlite} /home/kieran/config/hosts/homeserver/docker/open-web-ui/data/webui.db ".backup ${dumpDir}/open-web-ui.db"
-    ${sqlite} /home/kieran/config/hosts/homeserver/docker/hoser-shop-admin/data/sessions.sqlite ".backup ${dumpDir}/hoser-shop-sessions.db"
-    ${sqlite} /home/kieran/config/hosts/homeserver/docker/jellyfin/jellyfin/config/data/jellyfin.db ".backup ${dumpDir}/jellyfin.db"
-    ${sqlite} /home/kieran/config/hosts/homeserver/docker/arr/sonarr/config/sonarr.db ".backup ${dumpDir}/arr-sonarr.db"
-    ${sqlite} /home/kieran/config/hosts/homeserver/docker/arr/radarr/config/radarr.db ".backup ${dumpDir}/arr-radarr.db"
-    ${sqlite} /home/kieran/config/hosts/homeserver/docker/arr/lidarr/config/lidarr.db ".backup ${dumpDir}/arr-lidarr.db"
-    ${sqlite} /home/kieran/config/hosts/homeserver/docker/arr/bazarr/config/db/bazarr.db ".backup ${dumpDir}/arr-bazarr.db"
-    ${sqlite} /home/kieran/config/hosts/homeserver/docker/arr/prowlarr/config/prowlarr.db ".backup ${dumpDir}/arr-prowlarr.db"
+    ${sqlite} ${repoRoot}/hosts/homeserver/docker/paperless/data/db.sqlite3 ".backup ${dumpDir}/paperless.db"
+    ${sqlite} ${repoRoot}/hosts/homeserver/docker/pocket-id/data/pocket-id.db ".backup ${dumpDir}/pocket-id.db"
+    ${sqlite} ${repoRoot}/hosts/homeserver/docker/open-web-ui/data/webui.db ".backup ${dumpDir}/open-web-ui.db"
+    ${sqlite} ${repoRoot}/hosts/homeserver/docker/hoser-shop-admin/data/sessions.sqlite ".backup ${dumpDir}/hoser-shop-sessions.db"
+    ${sqlite} ${repoRoot}/hosts/homeserver/docker/jellyfin/jellyfin/config/data/jellyfin.db ".backup ${dumpDir}/jellyfin.db"
+    ${sqlite} ${repoRoot}/hosts/homeserver/docker/arr/sonarr/config/sonarr.db ".backup ${dumpDir}/arr-sonarr.db"
+    ${sqlite} ${repoRoot}/hosts/homeserver/docker/arr/radarr/config/radarr.db ".backup ${dumpDir}/arr-radarr.db"
+    ${sqlite} ${repoRoot}/hosts/homeserver/docker/arr/lidarr/config/lidarr.db ".backup ${dumpDir}/arr-lidarr.db"
+    ${sqlite} ${repoRoot}/hosts/homeserver/docker/arr/bazarr/config/db/bazarr.db ".backup ${dumpDir}/arr-bazarr.db"
+    ${sqlite} ${repoRoot}/hosts/homeserver/docker/arr/prowlarr/config/prowlarr.db ".backup ${dumpDir}/arr-prowlarr.db"
   '';
 
   backupCleanupCommand = ''
@@ -59,31 +61,31 @@ in
       Persistent = true;
       RandomizedDelaySec = "30m";
     };
-    paths = [ "/home/kieran/config" "/mnt/storage" dumpDir ];
+    paths = [ "${repoRoot}" "/mnt/storage" dumpDir ];
     exclude = [
       # config repo
-      "/home/kieran/config/.git"
+      "${repoRoot}/.git"
 
       # regenerable docker app data
-      "/home/kieran/config/hosts/homeserver/docker/open-web-ui/data/cache"
-      "/home/kieran/config/hosts/homeserver/docker/jellyfin/jellyfin/config/metadata"
-      "/home/kieran/config/hosts/homeserver/docker/jellyfin/jellyfin/config/data/trickplay"
-      "/home/kieran/config/hosts/homeserver/docker/jellyfin/jellyfin/config/data/subtitles"
-      "/home/kieran/config/hosts/homeserver/docker/jellyfin/jellyfin/config/log"
-      "/home/kieran/config/hosts/homeserver/docker/arr/*/config/logs"
-      "/home/kieran/config/hosts/homeserver/docker/arr/*/config/Backups"
+      "${repoRoot}/hosts/homeserver/docker/open-web-ui/data/cache"
+      "${repoRoot}/hosts/homeserver/docker/jellyfin/jellyfin/config/metadata"
+      "${repoRoot}/hosts/homeserver/docker/jellyfin/jellyfin/config/data/trickplay"
+      "${repoRoot}/hosts/homeserver/docker/jellyfin/jellyfin/config/data/subtitles"
+      "${repoRoot}/hosts/homeserver/docker/jellyfin/jellyfin/config/log"
+      "${repoRoot}/hosts/homeserver/docker/arr/*/config/logs"
+      "${repoRoot}/hosts/homeserver/docker/arr/*/config/Backups"
 
       # live database data
-      "/home/kieran/config/hosts/homeserver/docker/immich/postgres"
-      "/home/kieran/config/hosts/homeserver/docker/simple-gym/data"
-      "/home/kieran/config/hosts/homeserver/docker/uptime-kuma/data/mariadb"
-      "/home/kieran/config/hosts/homeserver/docker/bookorbit/data/postgres"
-      "/home/kieran/config/hosts/homeserver/docker/arr/**/*.db*"
-      "/home/kieran/config/hosts/homeserver/docker/paperless/data/db.sqlite3*"
-      "/home/kieran/config/hosts/homeserver/docker/pocket-id/data/pocket-id.db*"
-      "/home/kieran/config/hosts/homeserver/docker/open-web-ui/data/webui.db*"
-      "/home/kieran/config/hosts/homeserver/docker/hoser-shop-admin/data/sessions.sqlite*"
-      "/home/kieran/config/hosts/homeserver/docker/jellyfin/jellyfin/config/data/jellyfin.db*"
+      "${repoRoot}/hosts/homeserver/docker/immich/postgres"
+      "${repoRoot}/hosts/homeserver/docker/simple-gym/data"
+      "${repoRoot}/hosts/homeserver/docker/uptime-kuma/data/mariadb"
+      "${repoRoot}/hosts/homeserver/docker/bookorbit/data/postgres"
+      "${repoRoot}/hosts/homeserver/docker/arr/**/*.db*"
+      "${repoRoot}/hosts/homeserver/docker/paperless/data/db.sqlite3*"
+      "${repoRoot}/hosts/homeserver/docker/pocket-id/data/pocket-id.db*"
+      "${repoRoot}/hosts/homeserver/docker/open-web-ui/data/webui.db*"
+      "${repoRoot}/hosts/homeserver/docker/hoser-shop-admin/data/sessions.sqlite*"
+      "${repoRoot}/hosts/homeserver/docker/jellyfin/jellyfin/config/data/jellyfin.db*"
 
       # large regenerable media
       "/mnt/storage/media/movies"

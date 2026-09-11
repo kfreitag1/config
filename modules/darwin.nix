@@ -11,10 +11,10 @@
 
   kieran.age.secretDefaults = {
     mode = "400";
-    owner = "kieran";
+    owner = config.kieran.primaryUser;
     group = "staff";
   };
-  age.identityPaths = [ "/Users/kieran/.ssh/id_ed25519" ];
+  age.identityPaths = [ "/Users/${config.kieran.primaryUser}/.ssh/id_ed25519" ];
 
   system.activationScripts.postActivation.text = ''
     if [ -r ${config.age.secrets.github-token.path} ]; then
@@ -134,9 +134,9 @@
   security.pam.services.sudo_local.reattach = true;
 
   system.stateVersion = 6;
-  system.primaryUser = "kieran";
-  users.users.kieran = {
-    name = "kieran";
-    home = "/Users/kieran";
+  system.primaryUser = config.kieran.primaryUser;
+  users.users.${config.kieran.primaryUser} = {
+    name = config.kieran.primaryUser;
+    home = "/Users/${config.kieran.primaryUser}";
   };
 }

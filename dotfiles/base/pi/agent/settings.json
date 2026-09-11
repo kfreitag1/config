@@ -1,11 +1,8 @@
 {
   "lastChangelogVersion": "0.84.4",
   "defaultProvider": "openrouter",
-  "defaultModel": "z-ai/glm-5.3-flash",
+  "defaultModel": "deepseek/deepseek-v4.1-flash",
   "theme": "dark",
-  "packages": [
-    "npm:@tintinweb/pi-subagents",
-    "npm:pi-web-access",
-    "../../../Developer/pi-model-price"
-  ]
+  "packages": [],
+  "defaultThinkingLevel": "high"
 }

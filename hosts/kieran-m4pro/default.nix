@@ -1,16 +1,22 @@
 { config, pkgs, ... }:
 let
-  repoRoot = "${config.users.users.${config.system.primaryUser}.home}/config";
+  repoRoot = "${config.users.users.${config.kieran.primaryUser}.home}/config";
 in
 {
   imports = [ ../../modules/darwin.nix ];
 
   environment.variables.MACHINE_PROFILE = "personal";
 
-  home-manager.users.kieran.kieran.dotfiles.overlay = {
-    sourceDir = ../../dotfiles/personal;
-    checkout = "${repoRoot}/dotfiles/personal";
-  };
+  home-manager.users.${config.kieran.primaryUser}.kieran.dotfiles.overlays = [
+    {
+      sourceDir = ../../dotfiles/personal;
+      checkout = "${repoRoot}/dotfiles/personal";
+    }
+    {
+      sourceDir = ../../dotfiles/darwin;
+      checkout = "${repoRoot}/dotfiles/darwin";
+    }
+  ];
 
   environment.systemPackages = with pkgs; [
     zoom-us

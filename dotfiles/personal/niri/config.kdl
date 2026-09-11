@@ -1,0 +1,7 @@
+include "/etc/niri/default-config.kdl"
+
+input {
+    touchpad {
+        dwt
+    }
+}

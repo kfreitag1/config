@@ -1,8 +1,10 @@
 { config, pkgs, agenix, lib, ... }:
 
 let
+  repoRoot = "${config.users.users.${config.kieran.primaryUser}.home}/config";
+
   # Runtime location of the compose stacks in this repo's checkout
-  dockerRoot = "/home/kieran/config/hosts/homeserver/docker";
+  dockerRoot = "${repoRoot}/hosts/homeserver/docker";
 
   # Stacks are discovered from the flake (store) copy of ./docker, so the
   # whole config stays pure-evaluable. Keep in mind this means a stack only

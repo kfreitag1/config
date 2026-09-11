@@ -67,7 +67,7 @@
         "browseable" = "yes";
         "read only" = "no";
         "guest ok" = "no";
-        "valid users" = "kieran";
+        "valid users" = config.kieran.primaryUser;
         "create mask" = "0644";
         "directory mask" = "0755";
       };
@@ -77,7 +77,7 @@
         "browseable" = "yes";
         "read only" = "no";
         "guest ok" = "no";
-        "valid users" = "kieran";
+        "valid users" = config.kieran.primaryUser;
         "create mask" = "0644";
         "directory mask" = "0755";
       };
@@ -87,7 +87,7 @@
         "browseable" = "yes";
         "read only" = "no";
         "guest ok" = "no";
-        "valid users" = "kieran";
+        "valid users" = config.kieran.primaryUser;
         "fruit:time machine" = "yes";
         "vfs objects" = "catia fruit streams_xattr";
       };
@@ -119,7 +119,7 @@
   time.timeZone = "America/Vancouver";
   i18n.defaultLocale = "en_CA.UTF-8";
 
-  users.users.kieran = {
+  users.users.${config.kieran.primaryUser} = {
     isNormalUser = true;
     description = "Kieran Freitag";
     extraGroups = [ "networkmanager" "wheel" "docker" ];

@@ -1,7 +1,8 @@
 # Links the dotfiles checkout into ~/.config, one symlink per file
 #
-# Every file under `shared` (dotfiles/base) is linked; `overlay` (when set,
-# e.g. dotfiles/personal) overrides files of the same relative path.
+# Every file under `shared` (dotfiles/base) is linked; each entry in
+# `overlays` (e.g. dotfiles/personal, dotfiles/darwin) overrides files of
+# the same relative path, with later entries winning.
 # Symlinks point at the checkout, not the Nix store, so edits apply
 # without a rebuild. Files created by applications at runtime are
 # untouched, and conflict with a later repo addition (by design)
@@ -45,13 +46,15 @@ let
       name = rel;
       value.source = config.lib.file.mkOutOfStoreSymlink "${checkout}/${rel}";
     }) (walk srcDir ""));
+
+  overlayLinks = lib.foldl' (acc: o: acc // links o.sourceDir o.checkout) { } cfg.overlays;
 in
 {
   options.kieran.dotfiles = {
     shared = {
       sourceDir = lib.mkOption {
         type = lib.types.path;
-        default = ../../dotfiles/base;
+        default = ../dotfiles/base;
         description = "Store copy used to discover the shared dotfiles tree.";
       };
       checkout = lib.mkOption {
@@ -60,16 +63,19 @@ in
       };
     };
 
-    overlay = {
-      sourceDir = lib.mkOption {
-        type = with lib.types; nullOr path;
-        default = null;
-      };
-      checkout = lib.mkOption {
-        type = with lib.types; nullOr str;
-        default = null;
-        description = "Per-machine overlay; files override shared ones.";
-      };
+    overlays = lib.mkOption {
+      type = lib.types.listOf (lib.types.submodule {
+        options = {
+          sourceDir = lib.mkOption {
+            type = lib.types.path;
+          };
+          checkout = lib.mkOption {
+            type = lib.types.str;
+          };
+        };
+      });
+      default = [ ];
+      description = "Ordered per-machine overlays; later entries override earlier ones.";
     };
   };
 
@@ -77,10 +83,6 @@ in
     home.stateVersion = "25.05";
 
     xdg.enable = true;
-    xdg.configFile =
-      links cfg.shared.sourceDir cfg.shared.checkout
-      // lib.optionalAttrs (cfg.overlay.sourceDir != null) (
-        links cfg.overlay.sourceDir cfg.overlay.checkout
-      );
+    xdg.configFile = links cfg.shared.sourceDir cfg.shared.checkout // overlayLinks;
   };
 }

@@ -127,6 +127,24 @@ in
 
   services.logind.settings.Login.HandlePowerKey = "ignore";
 
+  systemd.services.brcmfmac-suspend = {
+    description = "Reload brcmfmac around suspend";
+    wantedBy = [ "sleep.target" ];
+    before = [ "sleep.target" ];
+    unitConfig.StopWhenUnneeded = true;
+    serviceConfig = {
+      Type = "oneshot";
+      RemainAfterExit = true;
+    };
+    script = ''
+      ${pkgs.kmod}/bin/rmmod brcmfmac_wcc 2>/dev/null || true
+      ${pkgs.kmod}/bin/rmmod brcmfmac
+    '';
+    preStop = ''
+      ${pkgs.kmod}/bin/modprobe brcmfmac
+    '';
+  };
+
   hardware.bluetooth.enable = true;
   services.upower.enable = true;
   services.power-profiles-daemon.enable = true;

@@ -146,7 +146,7 @@ in
     };
     script = ''
       ${pkgs.kmod}/bin/rmmod brcmfmac_wcc 2>/dev/null || true
-      ${pkgs.kmod}/bin/rmmod brcmfmac
+      ${pkgs.kmod}/bin/rmmod brcmfmac 2>/dev/null || true
     '';
     preStop = ''
       ${pkgs.kmod}/bin/modprobe brcmfmac

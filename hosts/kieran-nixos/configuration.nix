@@ -88,6 +88,14 @@ in
   # Niri + graphics config
   programs.niri.enable = true;
 
+  programs.hyprlock.enable = true;
+
+  systemd.user.services.hypridle.path = lib.mkForce [
+    pkgs.niri
+    config.programs.hyprlock.package
+    pkgs.procps
+  ];
+
   systemd.user.services.niri-overview-bar = {
     description = "Waybar, shown only while the niri overview is open";
     after = [ "graphical-session.target" ];
@@ -149,8 +157,6 @@ in
   services.upower.enable = true;
   services.power-profiles-daemon.enable = true;
 
-  security.pam.services.hyprlock = { };
-
   xdg.mime.defaultApplications = {
     "inode/directory" = "org.gnome.Nautilus.desktop";
     "x-scheme-handler/http" = "google-chrome.desktop";
@@ -187,10 +193,8 @@ in
 
   services.greetd = {
     enable = true;
-    settings.default_session = {
-      command = "${config.programs.niri.package}/bin/niri-session";
-      user = config.kieran.primaryUser;
-    };
+    useTextGreeter = true;
+    settings.default_session.command = "${pkgs.tuigreet}/bin/tuigreet --time --remember --cmd ${config.programs.niri.package}/bin/niri-session";
   };
   systemd.user.services.niri.enableDefaultPath = false;
 
@@ -222,7 +226,6 @@ in
     fuzzel
     waybar
     swaybg
-    hyprlock
     nautilus
     google-chrome
     xwayland-satellite

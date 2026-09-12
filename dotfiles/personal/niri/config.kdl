@@ -91,7 +91,7 @@ binds {
 
     Mod+T { spawn "ghostty"; }
     Mod+D { spawn "fuzzel"; }
-    Super+Alt+L { spawn "swaylock"; }
+    Super+Alt+L { spawn "hyprlock"; }
     Super+Alt+S allow-when-locked=true { spawn-sh "pkill orca || exec orca"; }
 
     XF86PowerOff { spawn "hyprlock"; }

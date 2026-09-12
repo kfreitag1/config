@@ -32,7 +32,6 @@
     nodejs_24
     go
     rustup
-    gh
     uv
     bun
   ];

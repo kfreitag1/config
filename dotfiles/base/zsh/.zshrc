@@ -38,7 +38,8 @@ zle -N zle-line-init
 eval "$(starship init zsh)"
 
 if [ -r /run/agenix/github-token ]; then
-  export NIX_CONFIG="access-tokens = github.com=$(cat /run/agenix/github-token)"
+  export GH_TOKEN="$(cat /run/agenix/github-token)"
+  export NIX_CONFIG="access-tokens = github.com=$GH_TOKEN"
 fi
 
 export XDG_CONFIG_HOME="$HOME/.config"

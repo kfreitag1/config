@@ -46,6 +46,7 @@
       fzf
       yazi
       starship
+      gh
 
       # External dependencies required by kickstart.nvim
       ripgrep

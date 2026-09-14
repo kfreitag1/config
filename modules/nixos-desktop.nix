@@ -12,51 +12,34 @@ let
   blurredWallpaper = pkgs.runCommand "cat_wallpaper-blur.png" {
     nativeBuildInputs = [ pkgs.ffmpeg-headless ];
   } ''
-    ffmpeg -hide_banner -loglevel error -y -i ${../../dotfiles/base/wallpapers/cat_wallpaper.png} -vf gblur=sigma=40 -frames:v 1 $out
+    ffmpeg -hide_banner -loglevel error -y -i ${../dotfiles/base/wallpapers/cat_wallpaper.png} -vf gblur=sigma=40 -frames:v 1 $out
   '';
-
 in
 {
+  imports = [ ./ironbar.nix ];
+
   environment.variables.MACHINE_PROFILE = "personal";
 
   home-manager.users.${config.kieran.primaryUser}.kieran.dotfiles.overlays = [
     {
-      sourceDir = ../../dotfiles/personal;
+      sourceDir = ../dotfiles/personal;
       checkout = "${repoRoot}/dotfiles/personal";
     }
     {
-      sourceDir = ../../dotfiles/kieran-nixos;
-      checkout = "${repoRoot}/dotfiles/kieran-nixos";
+      sourceDir = ../dotfiles/nixos;
+      checkout = "${repoRoot}/dotfiles/nixos";
     }
-  ];
-
-  # Wifi
-  hardware.firmware = [
-    (pkgs.stdenvNoCC.mkDerivation (final: {
-      name = "brcm-firmware";
-      src = ./firmware.tar;
-
-      dontUnpack = true;
-      installPhase = ''
-        mkdir -p $out/lib/firmware/brcm
-        tar -xf ${final.src} -C $out/lib/firmware/brcm
-      '';
-    }))
   ];
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.efi.efiSysMountPoint = "/boot";
+  boot.loader.systemd-boot.configurationLimit = 3;
 
-  services.tailscale = {
-    enable = true;
-  };
-
+  services.tailscale.enable = true;
   services.openssh.enable = true;
 
-  # Niri + graphics config
   programs.niri.enable = true;
-
   programs.hyprlock.enable = true;
 
   systemd.user.services.hypridle.path = lib.mkForce [
@@ -91,28 +74,6 @@ in
 
   services.logind.settings.Login.HandlePowerKey = "ignore";
 
-  systemd.services.brcmfmac-suspend = {
-    description = "Reload brcmfmac around suspend";
-    wantedBy = [ "sleep.target" ];
-    before = [ "sleep.target" ];
-    unitConfig.StopWhenUnneeded = true;
-    serviceConfig = {
-      Type = "oneshot";
-      RemainAfterExit = true;
-    };
-    script = ''
-      ${pkgs.kmod}/bin/rmmod brcmfmac_wcc 2>/dev/null || true
-      ${pkgs.kmod}/bin/rmmod brcmfmac 2>/dev/null || true
-    '';
-    preStop = ''
-      ${pkgs.kmod}/bin/modprobe brcmfmac
-    '';
-  };
-
-  hardware.bluetooth.enable = true;
-  services.upower.enable = true;
-  services.power-profiles-daemon.enable = true;
-
   xdg.mime.defaultApplications = {
     "inode/directory" = "org.gnome.Nautilus.desktop";
     "x-scheme-handler/http" = "google-chrome.desktop";
@@ -122,7 +83,6 @@ in
   };
 
   security.polkit.enable = true;
-  hardware.apple-t2.enableIGPU = true;
 
   services.keyd = {
     enable = true;
@@ -131,23 +91,6 @@ in
       settings.main.capslock = "overload(control, esc)";
     };
   };
-
-  services.udev.extraRules = ''
-    ACTION=="add", SUBSYSTEM=="backlight", RUN+="${pkgs.coreutils}/bin/chgrp video /sys/class/backlight/%k/brightness", RUN+="${pkgs.coreutils}/bin/chmod g+w /sys/class/backlight/%k/brightness"
-  '';
-
-  services.udev.extraHwdb = ''
-    touchpad:usb:v05acp0280:*
-     ID_INPUT_TOUCHPAD_INTEGRATION=internal
-  '';
-
-  environment.etc."libinput/local-overrides.quirks".text = ''
-    [Apple Internal Trackpad (T2)]
-    MatchVendor=0x05AC
-    MatchProduct=0x0280
-    MatchUdevType=touchpad
-    AttrPalmSizeThreshold=1200
-  '';
 
   services.libinput.enable = true;
 
@@ -158,8 +101,8 @@ in
   };
   systemd.user.services.niri.enableDefaultPath = false;
 
-  networking.hostName = "kieran-nixos";
   networking.networkmanager.enable = true;
+  networking.networkmanager.settings.main."hostname-mode" = "none";
 
   time.timeZone = "America/Vancouver";
   i18n.defaultLocale = "en_CA.UTF-8";
@@ -197,12 +140,8 @@ in
     options = "--delete-older-than 3";
   };
 
-  boot.loader.systemd-boot.configurationLimit = 3;
-
   environment.shellAliases = {
     rebuild = "sudo nixos-rebuild switch --impure --flake ~/config";
     update = "nix flake --extra-experimental-features \"nix-command flakes\" update --flake ~/config/flake.nix";
   };
-
-  system.stateVersion = "26.11";
 }

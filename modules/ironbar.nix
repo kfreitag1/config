@@ -16,6 +16,7 @@ let
       install -Dm755 ironbar-control $out/bin/ironbar-control
       runHook postInstall
     '';
+    meta.mainProgram = "ironbar-control";
   };
 
   osd = pkgs.writeShellScriptBin "osd" ''

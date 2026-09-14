@@ -1,12 +1,13 @@
 let
   hostKeys = {
     kieran-m4pro = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICQzXCHZhk/rHUSLI8+E5lNM3O1ZoZWUjyOPZG7Ivb5u kieran@Mac-2.lan";
-    kieran-nixos = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBfcv3tXDczgQ9+uWF2cHpIGEhkiYfJGzdH8O+W/EspV kieran@kieran-nixos";
+    kieran-nixos-t2 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBfcv3tXDczgQ9+uWF2cHpIGEhkiYfJGzdH8O+W/EspV kieran@kieran-nixos";
+    kieran-nixos-vm = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICQzXCHZhk/rHUSLI8+E5lNM3O1ZoZWUjyOPZG7Ivb5u kieran@Mac-2.lan";
     kieran-work = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKH56JrMAb3Tke2I1Oj1trLEnKwhb4IZDg6eClVQ3NyQ kieran@kieran-work.lan";
     homeserver = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAcM3fGjT0HJ2ApA0m/6oyFJV9HBJk/9JzhB3P0IVdOu root@homeserver";
   };
 
-  personal = [ "kieran-m4pro" "kieran-nixos" "homeserver" ];
+  personal = [ "kieran-m4pro" "kieran-nixos-t2" "kieran-nixos-vm" "homeserver" ];
   all = [ "kieran-work" ] ++ personal;
 
   secretHosts = {

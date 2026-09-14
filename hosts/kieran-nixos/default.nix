@@ -5,6 +5,7 @@
     inputs.home-manager.nixosModules.home-manager
     ../../modules/base.nix
     ./configuration.nix
+    ./ironbar.nix
     ./hardware-configuration.nix
     "${builtins.fetchGit { url = "https://github.com/NixOS/nixos-hardware.git"; }}/apple/t2"
   ];

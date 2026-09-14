@@ -1,0 +1,80 @@
+:root {
+  font-family: "DejaVu Sans", sans-serif;
+  font-size: 14px;
+}
+
+.background {
+  background: transparent;
+  /* background: red; */
+}
+
+#bar, .widget, .osd {
+  transition: all 320ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+#overview > #bar {
+  margin-top: 130px;
+  transform: 
+    translateY(calc(var(--hidden, 0) * -200px))
+    scale(calc(1 + var(--hidden, 0) * 0.5));
+  filter: blur(calc(var(--hidden, 0) * 5px));
+  opacity: calc(1 - var(--hidden, 0));
+}
+
+.osd {
+  background: rgba(24, 24, 24, 0.8);
+  border-radius: 9999px;
+  padding: 0 18px;
+  margin-bottom: 20px;
+  filter: blur(calc(var(--hidden, 0) * 15px));
+  transform: 
+    translateY(calc(var(--hidden, 0) * 60px)) 
+    scale(calc(1 + var(--hidden, 0) * 0.5));
+  opacity: calc(1 - var(--hidden, 0));
+}
+
+.osd-icon {
+  font-family: "JetBrainsMono Nerd Font";
+  font-size: 20px;
+  color: #ffffff;
+  margin-right: 14px;
+}
+
+.osd-bar trough {
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 9999px;
+  min-height: 8px;
+}
+
+.osd-bar progress {
+  background: #ffffff;
+  border-radius: 9999px;
+  min-height: 8px;
+  min-width: 8px;
+}
+
+#osd-volume .osd {
+  margin-right: 200px;
+}
+
+#osd-brightness .osd {
+  margin-left: 200px;
+}
+
+.clock {
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.network,
+.battery {
+  color: #bac2de;
+}
+
+.battery.profile-warning {
+  color: #f9e2af;
+}
+
+.battery.profile-critical {
+  color: #f38ba8;
+}

@@ -24,10 +24,6 @@
     fi
   '';
 
-  fonts.packages = with pkgs; [
-    nerd-fonts.jetbrains-mono
-  ];
-
   environment.systemPackages = with pkgs; [
     nodejs_24
     go

@@ -2,38 +2,6 @@
 let
   repoRoot = "${config.users.users.${config.kieran.primaryUser}.home}/config";
 
-  niriOverviewBar = pkgs.writeShellApplication {
-    name = "niri-overview-bar";
-    runtimeInputs = [ pkgs.niri pkgs.waybar pkgs.gnugrep ];
-    text = ''
-      waybar &
-      waybar_pid=$!
-      trap 'kill "$waybar_pid" 2>/dev/null || true' EXIT
-
-      # Wait for waybar's layer before forwarding signals: a signal sent
-      # before it installs its handlers would kill it instead.
-      until niri msg --json layers | grep -q '"namespace":"waybar"'; do
-        kill -0 "$waybar_pid" 2>/dev/null || exit 1
-        sleep 0.1
-      done
-
-      shown=0
-      while IFS= read -r line; do
-        case "$line" in
-          *OverviewOpenedOrClosed*'"is_open":true'*)
-            kill -USR1 "$waybar_pid" || exit 1
-            shown=1
-            ;;
-          *OverviewOpenedOrClosed*'"is_open":false'*)
-            [ "$shown" = 1 ] || continue
-            kill -USR2 "$waybar_pid" || exit 1
-            shown=0
-            ;;
-        esac
-      done < <(niri msg --json event-stream)
-    '';
-  };
-
   swaybgBackdrop = pkgs.swaybg.overrideAttrs (prev: {
     pname = "swaybg-backdrop";
     postPatch = ''
@@ -46,6 +14,7 @@ let
   } ''
     ffmpeg -hide_banner -loglevel error -y -i ${../../dotfiles/base/wallpapers/cat_wallpaper.png} -vf gblur=sigma=40 -frames:v 1 $out
   '';
+
 in
 {
   environment.variables.MACHINE_PROFILE = "personal";
@@ -95,19 +64,6 @@ in
     config.programs.hyprlock.package
     pkgs.procps
   ];
-
-  systemd.user.services.niri-overview-bar = {
-    description = "Waybar, shown only while the niri overview is open";
-    after = [ "graphical-session.target" ];
-    partOf = [ "graphical-session.target" ];
-    requisite = [ "graphical-session.target" ];
-    wantedBy = [ "graphical-session.target" ];
-    serviceConfig = {
-      ExecStart = lib.getExe niriOverviewBar;
-      Restart = "always";
-      RestartSec = 2;
-    };
-  };
 
   systemd.user.services.swaybg = {
     description = "Wallpaper (swaybg)";
@@ -176,6 +132,10 @@ in
     };
   };
 
+  services.udev.extraRules = ''
+    ACTION=="add", SUBSYSTEM=="backlight", RUN+="${pkgs.coreutils}/bin/chgrp video /sys/class/backlight/%k/brightness", RUN+="${pkgs.coreutils}/bin/chmod g+w /sys/class/backlight/%k/brightness"
+  '';
+
   services.udev.extraHwdb = ''
     touchpad:usb:v05acp0280:*
      ID_INPUT_TOUCHPAD_INTEGRATION=internal
@@ -207,7 +167,7 @@ in
   users.users.${config.kieran.primaryUser} = {
     isNormalUser = true;
     description = "Kieran Freitag";
-    extraGroups = [ "networkmanager" "wheel" "docker" ];
+    extraGroups = [ "networkmanager" "wheel" "docker" "video" ];
     shell = pkgs.zsh;
   };
 
@@ -224,8 +184,8 @@ in
     restic
     ghostty
     fuzzel
-    waybar
     swaybg
+    brightnessctl
     nautilus
     google-chrome
     xwayland-satellite

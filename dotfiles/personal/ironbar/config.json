@@ -1,0 +1,116 @@
+{
+  "monitors": {
+    "eDP-1": [
+      {
+        "name": "overview",
+        "position": "top",
+        "height": 180,
+        "start_hidden": true,
+        "exclusive_zone": false,
+        "center": [
+          {
+            "type": "clock",
+            "format": "%a %d %b  %H:%M"
+          }
+        ],
+        "end": [
+          {
+            "type": "script",
+            "class": "network",
+            "cmd": "/bin/sh ~/.config/ironbar/network.sh",
+            "interval": 5000
+          },
+          {
+            "type": "battery",
+            "format": "{percentage}%",
+            "show_icon": false,
+            "profiles": {
+              "warning": { "when": 20, "format": "{percentage}%" },
+              "critical": { "when": 10, "format": "{percentage}%" }
+            }
+          }
+        ]
+      },
+      {
+        "name": "osd-volume",
+        "position": "bottom",
+        "layer": "overlay",
+        "height": 60,
+        "start_hidden": true,
+        "exclusive_zone": false,
+        "end": [
+          {
+            "type": "custom",
+            "class": "osd",
+            "bar": [
+              {
+                "type": "box",
+                "class": "osd-box",
+                "widgets": [
+                  {
+                    "type": "label",
+                    "class": "osd-icon",
+                    "label": "{{w:stdbuf -oL pw-dump -m 2>/dev/null | jq -nr --unbuffered 'foreach inputs as $c ({d:null,s:{},g:null,e:null}; (reduce ($c[]? | select(.info? != null or .metadata? != null)) as $o (.; if ($o.info?.props?[\"media.class\"] == \"Audio/Sink\") and ($o.info?.params?.Props?[0]? != null) then .s[$o.info.props[\"node.name\"]] = ($o.info.params.Props[0].mute == true) elif ($o.metadata? != null) then .d = (($o.metadata[]? | select(.key == \"default.audio.sink\") | .value.name) // .d) else . end)) | if .d and (.s[.d] != null) and (.s[.d] != .g) then .e = (if .s[.d] then \"󰝟\" else \"󰕾\" end) | .g = .s[.d] else .e = null end; .e // empty)'}}"
+                  },
+                  {
+                    "type": "box",
+                    "class": "osd-bar-box",
+                    "valign": "center",
+                    "widgets": [
+                      {
+                        "type": "progress",
+                        "class": "osd-bar",
+                        "length": 200,
+                        "value": "w:stdbuf -oL pw-dump -m 2>/dev/null | jq -nr --unbuffered 'foreach inputs as $c ({d:null,s:{},g:null,e:null}; (reduce ($c[]? | select(.info? != null or .metadata? != null)) as $o (.; if ($o.info?.props?[\"media.class\"] == \"Audio/Sink\") and ($o.info?.params?.Props?[0]?.channelVolumes != null) then .s[$o.info.props[\"node.name\"]] = (($o.info.params.Props[0].channelVolumes[0] | pow(.; 1/3)) * 100 | round) elif ($o.metadata? != null) then .d = (($o.metadata[]? | select(.key == \"default.audio.sink\") | .value.name) // .d) else . end)) | if .d and (.s[.d] != null) and (.s[.d] != .g) then .e = .s[.d] | .g = .s[.d] else .e = null end; .e // empty)'"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "osd-brightness",
+        "position": "bottom",
+        "layer": "overlay",
+        "height": 60,
+        "start_hidden": true,
+        "exclusive_zone": false,
+        "start": [
+          {
+            "type": "custom",
+            "class": "osd",
+            "bar": [
+              {
+                "type": "box",
+                "class": "osd-box",
+                "widgets": [
+                  {
+                    "type": "label",
+                    "class": "osd-icon",
+                    "label": "󰖨"
+                  },
+                  {
+                    "type": "box",
+                    "class": "osd-bar-box",
+                    "valign": "center",
+                    "widgets": [
+                      {
+                        "type": "progress",
+                        "class": "osd-bar",
+                        "length": 200,
+                        "value": "w:l=$(awk 'NR==FNR{m=$1;next}{printf \"%d\", $1/m*100}' /sys/class/backlight/*/max_brightness /sys/class/backlight/*/brightness); printf \"$l\\n\"; stdbuf -oL udevadm monitor --kernel --subsystem-match=backlight 2>/dev/null | while read -r _; do v=$(awk 'NR==FNR{m=$1;next}{printf \"%d\", $1/m*100}' /sys/class/backlight/*/max_brightness /sys/class/backlight/*/brightness); [ \"$v\" != \"$l\" ] && { l=$v; printf \"$v\\n\"; }; done"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

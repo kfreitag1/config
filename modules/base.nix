@@ -37,6 +37,10 @@
 
     environment.shellAliases.g = "git";
 
+    fonts.packages = with pkgs; [
+      nerd-fonts.jetbrains-mono
+    ];
+
     environment.systemPackages = with pkgs; [
       neovim
       git

@@ -15,4 +15,3 @@ quick-terminal-space-behavior = remain
 bell-features = no-attention, no-title
 macos-hidden = always
 background-opacity = 0.85
-background-opacity-cells = true

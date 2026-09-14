@@ -21,7 +21,8 @@ in
     '';
   };
 
-  config.age.secrets = builtins.mapAttrs (name: _:
-    { file = ../secrets/${name}.age; } // config.kieran.age.secretDefaults
+  config.age.secrets = lib.mapAttrs' (name: _:
+    lib.nameValuePair (lib.removeSuffix ".age" name)
+      ({ file = ../secrets/${name}; } // config.kieran.age.secretDefaults)
   ) mine;
 }

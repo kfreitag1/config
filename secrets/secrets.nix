@@ -28,7 +28,10 @@ let
     "restic-repo-password" = personal;
   };
 in
-builtins.mapAttrs (_: hosts: {
-  inherit hosts;
-  publicKeys = map (h: hostKeys.${h}) hosts;
-}) secretHosts
+builtins.listToAttrs (map (name: {
+  name = "${name}.age";
+  value = {
+    hosts = secretHosts.${name};
+    publicKeys = map (h: hostKeys.${h}) secretHosts.${name};
+  };
+}) (builtins.attrNames secretHosts))

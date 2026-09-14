@@ -33,6 +33,7 @@
     environment.variables = {
       ZDOTDIR = "$HOME/.config/zsh";
       PI_CODING_AGENT_DIR = "$HOME/.config/pi/agent";
+      EDITOR = "nvim";
     };
 
     environment.shellAliases.g = "git";

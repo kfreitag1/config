@@ -27,4 +27,5 @@
     ls = "!printf '\\033[90m> git log --oneline --decorate --graph --all\\033[0m\\n' && git log --oneline --decorate --graph --all \"$@\""
     sh = "!printf '\\033[90m> git show\\033[0m\\n' && git show \"$@\""
     unc = "!printf '\\033[90m> git reset --soft @^\\033[0m\\n' && git reset --soft @^ \"$@\""
+    uunc = "!printf '\\033[90m> git reset --soft ORIG_HEAD\\033[0m\\n' && git reset --soft ORIG_HEAD"
     rec = "!printf '\\033[90m> git commit --reuse-message=HEAD@{1}\\033[0m\\n' && git commit --reuse-message=HEAD@{1} \"$@\""

@@ -1,12 +1,7 @@
 {
   "defaultModel": "fireworks:accounts/fireworks/models/kimi-k3",
   "defaultProvider": "fireworks",
-  "npmCommand": [
-    "pnpm"
-  ],
-  "lastChangelogVersion": "0.84.3",
   "defaultThinkingLevel": "high",
-  "theme": "dark",
   "enabledModels": [
     "fireworks/fireworks:accounts/fireworks/models/kimi-k3",
     "fireworks/fireworks:accounts/fireworks/models/deepseek-v4-pro-0813",
@@ -17,5 +12,14 @@
     "openai-1m/gpt-5.6-sol",
     "openai-1m/gpt-5.6-terra",
     "openai-1m/gpt-5.6-luna"
-  ]
+  ],
+  "lastChangelogVersion": "0.87.1",
+  "npmCommand": [
+    "pnpm",
+    "--config.node-version=22.22.2"
+  ],
+  "packages": [
+    "git:github.com/Shopify/pi-tool-gateway-extension"
+  ],
+  "theme": "dark"
 }

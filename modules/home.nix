@@ -4,8 +4,8 @@
 # `overlays` (e.g. dotfiles/personal, dotfiles/darwin) overrides files of
 # the same relative path, with later entries winning.
 # Symlinks point at the checkout, not the Nix store, so edits apply
-# without a rebuild. Files created by applications at runtime are
-# untouched, and conflict with a later repo addition (by design)
+# without a rebuild. Files created by applications at runtime conflict
+# with a repo addition, unless listed in `force` below
 {
   config,
   lib,
@@ -19,6 +19,12 @@ let
     ".DS_Store"
     ".gitignore"
     "result"
+  ];
+
+  # Configs that apps rewrite while running; replace on activation instead of aborting
+  force = [
+    "karabiner/karabiner.json"
+    "pi/agent/settings.json"
   ];
 
   # Relative paths of all files under `dir` (readDir runs on the flake's
@@ -44,7 +50,10 @@ let
   links = srcDir: checkout:
     lib.listToAttrs (map (rel: {
       name = rel;
-      value.source = config.lib.file.mkOutOfStoreSymlink "${checkout}/${rel}";
+      value = {
+        source = config.lib.file.mkOutOfStoreSymlink "${checkout}/${rel}";
+        force = lib.elem rel force;
+      };
     }) (walk srcDir ""));
 
   overlayLinks = lib.foldl' (acc: o: acc // links o.sourceDir o.checkout) { } cfg.overlays;

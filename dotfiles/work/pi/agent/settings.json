@@ -18,8 +18,6 @@
     "pnpm",
     "--config.node-version=22.22.2"
   ],
-  "packages": [
-    "git:github.com/Shopify/pi-tool-gateway-extension"
-  ],
+  "packages": [],
   "theme": "dark"
 }

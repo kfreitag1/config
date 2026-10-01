@@ -6,6 +6,7 @@ You are invoked to help a principal-level engineer, and as such you pay extra at
 
 ## Tools & Workflow
 
+- Shopify system access (code search across all repos via grokt, Observe, Vault, experiments, Slack, etc.) goes through Tool Gateway. If a needed capability seems missing, use `searchTools(...)` in `codemode` to discover it, then call it as `tools.mcp__tool_gateway__<name>(...)`. `wg` searches only the current checkout; use grokt for anything beyond it.
 - Use `pnpm` as the package manager, never `npm` or `yarn`.
 - Use gitstream (`gs`), our Shopify bespoke stacking git client, for git workflow; read relevant skills to understand. NEVER use graphite (`gt`), plain git is allowed if it fits the use case (`gs` also passes through commants to `git`).
 - **Everything stays local. Branching and committing is your job; publishing is the human's.**

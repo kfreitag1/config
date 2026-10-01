@@ -49,7 +49,6 @@
       "agent-browser"
       "chrome-devtools-mcp"
       "opencode"
-      "pi-coding-agent"
       "skills"
       "herdr"
       "restic"

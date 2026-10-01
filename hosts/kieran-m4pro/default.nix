@@ -61,6 +61,7 @@ in
       "openjdk"
       "lazydocker"
       "pandoc"
+      "pi-coding-agent"
       "shopify-cli"
     ];
   };

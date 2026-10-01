@@ -1,6 +1,6 @@
 alias sskills='npx @shopify/skills'
-alias cir='devx ci run --full && devx binks review'
-alias cirr='devx ci run --full --no-local-checks && devx binks review'
+cir() { devx ci run --full && devx binks review }
+cirr() { devx ci run --full --no-local-checks && devx binks review }
 gsss() {
   local cmd=cir n=1 arg i
 

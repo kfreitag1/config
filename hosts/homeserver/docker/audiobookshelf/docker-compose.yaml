@@ -1,0 +1,26 @@
+services:
+    audiobookshelf:
+        image: ghcr.io/advplyr/audiobookshelf:latest
+        container_name: audiobookshelf
+        environment:
+            - TZ=America/Vancouver
+        volumes:
+            - ./config:/config
+            - ./metadata:/metadata
+            - type: bind
+              source: /mnt/storage/media
+              target: /media
+              read_only: true
+        restart: always
+        labels:
+            caddy: audiobooks.kfreitag.ca
+            caddy.reverse_proxy: "{{upstreams 80}}"
+            homepage.group: Media
+            homepage.name: Audiobookshelf
+            homepage.href: audiobooks.kfreitag.ca
+        networks:
+            - caddy_network
+
+networks:
+    caddy_network:
+        external: true

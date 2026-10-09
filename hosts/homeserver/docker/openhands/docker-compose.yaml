@@ -1,0 +1,48 @@
+services:
+    openhands:
+        image: ghcr.io/openhands/agent-canvas:latest
+        container_name: openhands
+        # The image's own entrypoint (tini -- /opt/agent-canvas/entrypoint.sh)
+        # is re-wrapped here so the OpenRouter key can be read from the agenix
+        # secret at startup instead of being passed as a plaintext env var.
+        # The agent-server inherits it, and litellm picks it up for
+        # openrouter/* models.
+        entrypoint:
+            - /bin/sh
+            - -c
+            - |
+                export OPENROUTER_API_KEY="$$(cat /run/secrets/openrouter-api-key)"
+                exec tini -- /opt/agent-canvas/entrypoint.sh
+        environment:
+            - TZ=America/Vancouver
+            # Disable product analytics.
+            - VITE_DO_NOT_TRACK=1
+            # Without this the unified frontend won't inject the session API
+            # key (the container only knows it's bound to a non-loopback
+            # host), leaving the UI stuck on the API-key prompt. Safe here:
+            # the port is only reachable via caddy, which is gated by OIDC.
+            - AGENT_CANVAS_ALLOW_LAN_SESSION_KEY=true
+            # Public URL of the automation backend, used in callback URLs.
+            - AUTOMATION_BASE_URL=https://agents.kfreitag.ca
+        volumes:
+            # Settings, conversations and the auto-generated session/secret
+            # keys live here; must be writable by uid/gid 10001 (the
+            # openhands user in the image), e.g. chown 10001:10001 data
+            - ./data:/home/openhands/.openhands
+            - ./projects:/projects
+            - /run/agenix/openrouter-api-key:/run/secrets/openrouter-api-key:ro
+        restart: always
+        labels:
+            caddy: agents.kfreitag.ca
+            caddy.reverse_proxy: "{{upstreams 8000}}"
+            # No native OIDC support, so fall back to tinyauth forward auth.
+            caddy.import: tinyauth_forwarder *
+            homepage.group: AI
+            homepage.name: OpenHands
+            homepage.href: agents.kfreitag.ca
+        networks:
+            - caddy_network
+
+networks:
+    caddy_network:
+        external: true

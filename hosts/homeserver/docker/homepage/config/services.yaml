@@ -74,6 +74,10 @@
             href: https://chat.kfreitag.ca
             icon: open-webui
             description: LLM chat
+      - OpenHands:
+            href: https://agents.kfreitag.ca
+            icon: openhands
+            description: Coding agent
 
 - System:
       - Homepage:

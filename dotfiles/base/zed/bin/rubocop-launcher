@@ -16,7 +16,9 @@
 
 set -eu
 
-SHADOWENV="/Users/kieran/.local/state/tec/profiles/base/current/global/bin/shadowenv"
+TEC_BIN="/Users/kieran/.local/state/tec/profiles/base/current/global/bin"
+SHADOWENV="$TEC_BIN/shadowenv"
+export PATH="$TEC_BIN:$PATH"
 
 # Nearest ancestor (or self) containing a Gemfile. Stops at $HOME.
 find_gemfile_dir() {
@@ -31,10 +33,46 @@ find_gemfile_dir() {
   return 1
 }
 
+in_env() {
+  if [ -x "$SHADOWENV" ]; then
+    "$SHADOWENV" exec -- "$@"
+  else
+    "$@"
+  fi
+}
+
+bundle_ok() {
+  for spec in .dev/gem/specifications/*.gemspec; do
+    name=${spec##*/}
+    [ -e ".dev/gem/gems/${name%.gemspec}" ] || return 1
+  done
+  [ -z "$(find -L .dev/gem/bundler/gems -maxdepth 1 -type l -print -quit 2>/dev/null)" ] || return 1
+  in_env bundle check >/dev/null 2>&1
+}
+
+# Lockfile pulls and tec env rebuilds leave .dev/gem stale; stdout is the LSP channel so all output goes to stderr
+heal_bundle() {
+  if [ ! -d .shadowenv.d ]; then
+    case $PWD in "$HOME"/world/*) echo "zed: no zone env in $PWD, run dev up there" >&2; exit 1 ;; esac
+    return 0
+  fi
+  lock=".dev/zed-bundle.lock"
+  mkdir -p .dev
+  waited=0
+  until mkdir "$lock" 2>/dev/null; do
+    waited=$((waited + 1))
+    [ "$waited" -ge 300 ] && { rmdir "$lock" 2>/dev/null || true; }
+    sleep 1
+  done
+  bundle_ok || in_env bundle install --quiet >&2 || true
+  rmdir "$lock"
+}
+
 if gemfile_dir=$(find_gemfile_dir) && \
    [ -f "$gemfile_dir/Gemfile.lock" ] && \
    grep -qE '^[[:space:]]+rubocop[[:space:]]+\(' "$gemfile_dir/Gemfile.lock"; then
   cd "$gemfile_dir"
+  heal_bundle
   if [ -x "$SHADOWENV" ]; then
     exec "$SHADOWENV" exec -- bundle exec rubocop --lsp "$@"
   fi

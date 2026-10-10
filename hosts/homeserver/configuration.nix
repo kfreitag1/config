@@ -175,5 +175,8 @@
   networking.firewall.allowedTCPPorts = [ 22 80 443 8123 21063 21064 ];
   networking.firewall.allowedUDPPorts = [ 443 1212 5353 5540 49191 ];
 
+  # Fix for sleepy matter devices like Ikea BILRESA buttons
+  boot.kernel.sysctl."net.netfilter.nf_conntrack_udp_timeout_stream" = 3600;
+
   system.stateVersion = "25.05";
 }

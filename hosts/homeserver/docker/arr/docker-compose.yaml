@@ -106,6 +106,44 @@ services:
         networks:
             - caddy_network
 
+    navidrome:
+        image: ghcr.io/navidrome/navidrome:latest
+        container_name: navidrome
+        environment:
+            - TZ=America/Vancouver
+            # ExtAuth: trust caddy (caddy_network subnet) and read the user
+            # from the Remote-User header tinyauth's forward auth injects.
+            # First header-login auto-creates the user as admin. caddy strips
+            # client-supplied Remote-* headers on /rest, otherwise Navidrome
+            # would accept spoofed identity there.
+            - ND_EXTAUTH_TRUSTEDSOURCES=172.18.0.0/16
+        volumes:
+            - ./navidrome/data:/data
+            - /mnt/storage/media/music:/music:ro
+        restart: always
+        labels:
+            caddy: music.kfreitag.ca
+            caddy.@rest: path /rest/*
+            caddy.@web: not path /rest/*
+            # Subsonic API clients authenticate with Navidrome credentials;
+            # drop any identity headers they try to send.
+            caddy.0_reverse_proxy: "@rest {{upstreams 4533}}"
+            caddy.0_reverse_proxy.0_header_up: -Remote-User
+            caddy.0_reverse_proxy.1_header_up: -Remote-Email
+            caddy.0_reverse_proxy.2_header_up: -Remote-Groups
+            caddy.0_reverse_proxy.3_header_up: -Remote-Sub
+            # Web UI: tinyauth OIDC gate, then hand the authenticated identity
+            # to Navidrome's ExtAuth for SSO auto-login.
+            caddy.1_forward_auth: "@web tinyauth:3000"
+            caddy.1_forward_auth.uri: /api/auth/caddy
+            caddy.1_forward_auth.copy_headers: Remote-User Remote-Email
+            caddy.1_reverse_proxy: "{{upstreams 4533}}"
+            homepage.group: Media
+            homepage.name: Navidrome
+            homepage.href: music.kfreitag.ca
+        networks:
+            - caddy_network
+
 networks:
     caddy_network:
         external: true

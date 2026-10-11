@@ -26,17 +26,20 @@ services:
         networks:
             - caddy_network
 
-    jellyseerr:
-        image: fallenbagel/jellyseerr:preview-OIDC
-        container_name: jellyseerr
+    seerrng:
+        image: ghcr.io/snapetech/seerrng:latest
+        container_name: seerrng
         environment:
             - TZ=America/Vancouver
         volumes:
-            - ./jellyseerr/config:/app/config
+            - ./seerrng/config:/app/config
         restart: always
         labels:
             caddy: request.kfreitag.ca
             caddy.reverse_proxy: "{{upstreams 5055}}"
+            homepage.group: Media
+            homepage.name: SeerrNG
+            homepage.href: request.kfreitag.ca
         networks:
             - caddy_network
 

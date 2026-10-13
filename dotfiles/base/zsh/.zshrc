@@ -51,6 +51,14 @@ bindkey -v
 # git autocomplete
 autoload -Uz compinit && compinit
 
+function y() {
+    local tmp cwd; tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
+    command yazi "$@" --cwd-file="$tmp"
+    IFS= read -r -d '' cwd < "$tmp"
+    [ "$cwd" != "$PWD" ] && [ -d "$cwd" ] && builtin cd -- "$cwd" || builtin true
+    command rm -f -- "$tmp"
+}
+
 
 # per-profile drop-ins (home-manager links one per machine)
 for f in "$ZDOTDIR"/zshrc.d/*.zsh(N); do source "$f"; done

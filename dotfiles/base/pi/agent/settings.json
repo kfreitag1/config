@@ -1,7 +1,7 @@
 {
   "lastChangelogVersion": "0.84.4",
   "defaultProvider": "openrouter",
-  "defaultModel": "deepseek/deepseek-v4.1-flash",
+  "defaultModel": "~z-ai/glm-flash-latest",
   "theme": "dark",
   "packages": [],
   "defaultThinkingLevel": "high"

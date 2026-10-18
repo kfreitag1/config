@@ -172,7 +172,7 @@
 
   networking.firewall.enable = true;
   networking.firewall.trustedInterfaces = [ "tailscale0" ];
-  networking.firewall.allowedTCPPorts = [ 22 80 443 8123 21063 21064 ];
+  networking.firewall.allowedTCPPorts = [ 22 80 443 8123 21063 21064 50300 ];
   networking.firewall.allowedUDPPorts = [ 443 1212 5353 5540 49191 ];
 
   # Fix for sleepy matter devices like Ikea BILRESA buttons

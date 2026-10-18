@@ -41,7 +41,7 @@ let
     ${sqlite} ${repoRoot}/hosts/homeserver/docker/jellyfin/jellyfin/config/data/jellyfin.db ".backup ${dumpDir}/jellyfin.db"
     ${sqlite} ${repoRoot}/hosts/homeserver/docker/arr/sonarr/config/sonarr.db ".backup ${dumpDir}/arr-sonarr.db"
     ${sqlite} ${repoRoot}/hosts/homeserver/docker/arr/radarr/config/radarr.db ".backup ${dumpDir}/arr-radarr.db"
-    ${sqlite} ${repoRoot}/hosts/homeserver/docker/arr/lidarr/config/lidarr.db ".backup ${dumpDir}/arr-lidarr.db"
+    ${sqlite} ${repoRoot}/hosts/homeserver/docker/aurral/config/aurral.db ".backup ${dumpDir}/aurral.db"
     ${sqlite} ${repoRoot}/hosts/homeserver/docker/arr/bazarr/config/db/bazarr.db ".backup ${dumpDir}/arr-bazarr.db"
     ${sqlite} ${repoRoot}/hosts/homeserver/docker/arr/prowlarr/config/prowlarr.db ".backup ${dumpDir}/arr-prowlarr.db"
   '';

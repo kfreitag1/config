@@ -1,0 +1,84 @@
+services:
+    aurral:
+        image: ghcr.io/lklynet/aurral:nightly
+        container_name: aurral
+        environment:
+            - PUID=1000
+            - PGID=1000
+            - TZ=America/Vancouver
+            - TRUST_PROXY=true
+            - AURRAL_PUBLIC_URL=https://music.kfreitag.ca
+            - OIDC_ENABLED=true
+            - OIDC_ISSUER=https://id.kfreitag.ca
+            - OIDC_CLIENT_ID=${OIDC_CLIENT_ID:?required}
+            - OIDC_REDIRECT_URI=https://music.kfreitag.ca/sso/callback
+            - OIDC_ADMIN_USERS=${OIDC_ADMIN_USERS:-kieran}
+        volumes:
+            - ./config:/config
+            - type: bind
+              source: /mnt/storage/media/music
+              target: /data
+              bind:
+                  propagation: rshared
+                  create_host_path: false
+            - /run/agenix/aurral-oidc-client-secret:/run/secrets/aurral-oidc-client-secret:ro
+        command:
+            - sh
+            - -c
+            - export OIDC_CLIENT_SECRET="$$(cat /run/secrets/aurral-oidc-client-secret)" && exec node backend/server.js
+        healthcheck:
+            test:
+                - CMD
+                - node
+                - -e
+                - fetch('http://localhost:3001/api/health/live').then((r) => { if (!r.ok) process.exit(1) }).catch(() => process.exit(1))
+            interval: 30s
+            timeout: 10s
+            retries: 5
+            start_period: 60s
+        restart: always
+        labels:
+            caddy: music.kfreitag.ca
+            caddy.reverse_proxy: "{{upstreams 3001}}"
+            homepage.group: Media
+            homepage.name: Aurral
+            homepage.href: music.kfreitag.ca
+        networks:
+            - caddy_network
+            - default
+
+    slskd:
+        image: slskd/slskd:latest
+        container_name: slskd
+        environment:
+            - PUID=1000
+            - PGID=1000
+            - TZ=America/Vancouver
+            - SLSKD_DOWNLOADS_DIR=/data/downloads/slskd
+            - SLSKD_INCOMPLETE_DIR=/data/downloads/slskd/incomplete
+            - SLSKD_SHARED_DIR=/data
+            - SLSKD_SHARE_FILTER=downloads/slskd;\.aurral-migration
+            - SLSKD_REMOTE_CONFIGURATION=false
+            - SLSKD_METRICS=true
+            - SLSKD_METRICS_NO_AUTH=true
+            - SLSKD_SLSK_USERNAME=${SLSK_USERNAME:?required}
+        volumes:
+            - ./data:/app
+            - type: bind
+              source: /mnt/storage/media/music
+              target: /data
+              bind:
+                  propagation: rshared
+                  create_host_path: false
+            - /run/agenix/aurral-oidc-client-secret:/run/secrets/aurral-oidc-client-secret:ro
+        ports:
+            - "50300:50300"
+        command:
+            - sh
+            - -c
+            - export SLSKD_SLSK_PASSWORD="$$(cat /run/secrets/aurral-oidc-client-secret)" && export SLSKD_API_KEY="$$(cat /run/secrets/aurral-oidc-client-secret)" && exec ./slskd
+        restart: always
+
+networks:
+    caddy_network:
+        external: true

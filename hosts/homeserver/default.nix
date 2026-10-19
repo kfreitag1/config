@@ -8,6 +8,7 @@
     ./configuration.nix
     ./docker.nix
     ./hardware-configuration.nix
+    ./printing.nix
     ./homeserver-hardware.nix
   ];
 

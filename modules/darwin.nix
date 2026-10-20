@@ -50,7 +50,6 @@
       "chrome-devtools-mcp"
       "opencode"
       "skills"
-      "herdr"
       "restic"
     ];
     onActivation.cleanup = "zap";

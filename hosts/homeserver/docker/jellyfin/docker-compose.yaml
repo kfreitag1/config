@@ -26,20 +26,17 @@ services:
         networks:
             - caddy_network
 
-    seerrng:
-        image: ghcr.io/snapetech/seerrng:latest
-        container_name: seerrng
+    seerr:
+        image: ghcr.io/seerr-team/seerr:preview-new-oidc
+        container_name: seerr
         environment:
             - TZ=America/Vancouver
         volumes:
-            - ./seerrng/config:/app/config
+            - ./seerr/config:/app/config
         restart: always
         labels:
             caddy: request.kfreitag.ca
             caddy.reverse_proxy: "{{upstreams 5055}}"
-            homepage.group: Media
-            homepage.name: SeerrNG
-            homepage.href: request.kfreitag.ca
         networks:
             - caddy_network
 

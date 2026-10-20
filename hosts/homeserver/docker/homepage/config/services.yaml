@@ -7,9 +7,9 @@
             href: https://watch.kfreitag.ca
             icon: jellyfin
             description: Movies & TV
-      - SeerrNG:
+      - Seerr:
             href: https://request.kfreitag.ca
-            icon: jellyseerr
+            icon: overseerr
             description: Media requests
       - Immich:
             href: https://photos.kfreitag.ca

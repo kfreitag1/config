@@ -1,6 +1,6 @@
 services:
     aurral:
-        image: ghcr.io/lklynet/aurral:nightly
+        image: ghcr.io/lklynet/aurral:latest
         container_name: aurral
         environment:
             - PUID=1000

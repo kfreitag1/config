@@ -33,6 +33,10 @@ let
     ${docker} exec bookorbit-db sh -c 'pg_dumpall -U "$POSTGRES_USER" --clean --if-exists' > ${dumpDir}/bookorbit-pg.sql
     ${gzip} -f ${dumpDir}/bookorbit-pg.sql
 
+    # --- PostgreSQL (norish) ---
+    ${docker} exec norish-postgres pg_dumpall -U postgres --clean --if-exists > ${dumpDir}/norish-pg.sql
+    ${gzip} -f ${dumpDir}/norish-pg.sql
+
     # --- SQLite (consistent online .backup) ---
     ${sqlite} ${repoRoot}/hosts/homeserver/docker/paperless/data/db.sqlite3 ".backup ${dumpDir}/paperless.db"
     ${sqlite} ${repoRoot}/hosts/homeserver/docker/pocket-id/data/pocket-id.db ".backup ${dumpDir}/pocket-id.db"
@@ -80,6 +84,8 @@ in
       "${repoRoot}/hosts/homeserver/docker/simple-gym/data"
       "${repoRoot}/hosts/homeserver/docker/uptime-kuma/data/mariadb"
       "${repoRoot}/hosts/homeserver/docker/bookorbit/data/postgres"
+      "${repoRoot}/hosts/homeserver/docker/norish/postgres"
+      "${repoRoot}/hosts/homeserver/docker/norish/redis"
       "${repoRoot}/hosts/homeserver/docker/arr/**/*.db*"
       "${repoRoot}/hosts/homeserver/docker/paperless/data/db.sqlite3*"
       "${repoRoot}/hosts/homeserver/docker/pocket-id/data/pocket-id.db*"

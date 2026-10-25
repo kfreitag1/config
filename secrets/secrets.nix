@@ -33,6 +33,7 @@ let
     "open-webui-oidc-client-secret" = personal;
     "arcane-encryption-key" = personal;
     "arcane-oidc-client-secret" = personal;
+    "norish-oidc-client-secret" = personal;
     "restic-b2-env" = personal;
     "restic-repo-password" = personal;
   };

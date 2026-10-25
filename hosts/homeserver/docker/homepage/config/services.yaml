@@ -51,10 +51,6 @@
             href: https://docs.kfreitag.ca
             icon: paperless
             description: Documents
-      - Actual Budget:
-            href: https://budget.kfreitag.ca
-            icon: actual-budget
-            description: Finances
       - Obsidian LiveSync:
             href: https://obsidian-livesync.kfreitag.ca
             icon: si-obsidian

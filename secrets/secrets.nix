@@ -20,7 +20,6 @@ let
 
     "cloudflare-api-key" = personal;
     "pocket-id-encryption-key" = personal;
-    "actual-budget-oidc-client-secret" = personal;
     "aurral-oidc-client-secret" = personal;
     "admin-apps-oidc-client-secret" = personal;
     "immich-db-pass" = personal;

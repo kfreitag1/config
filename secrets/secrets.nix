@@ -33,6 +33,9 @@ let
     "arcane-encryption-key" = personal;
     "arcane-oidc-client-secret" = personal;
     "norish-oidc-client-secret" = personal;
+    "karakeep-oidc-client-secret" = personal;
+    "karakeep-nextauth-secret" = personal;
+    "karakeep-meili-master-key" = personal;
     "restic-b2-env" = personal;
     "restic-repo-password" = personal;
   };

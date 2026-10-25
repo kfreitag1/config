@@ -51,6 +51,10 @@
             href: https://docs.kfreitag.ca
             icon: paperless
             description: Documents
+      - Karakeep:
+            href: https://keep.kfreitag.ca
+            icon: karakeep
+            description: Bookmarks
       - Obsidian LiveSync:
             href: https://obsidian-livesync.kfreitag.ca
             icon: si-obsidian

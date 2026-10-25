@@ -1,0 +1,37 @@
+services:
+    arcane:
+        image: ghcr.io/getarcaneapp/manager:latest
+        container_name: arcane
+        restart: always
+        cgroup: host
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock
+            - ./data:/app/data
+            - /home/kieran/config/hosts/homeserver/docker:/home/kieran/config/hosts/homeserver/docker
+            - /run/agenix/arcane-encryption-key:/run/secrets/arcane-encryption-key:ro
+            - /run/agenix/arcane-oidc-client-secret:/run/secrets/arcane-oidc-client-secret:ro
+        environment:
+            - APP_URL=https://containers.kfreitag.ca
+            - PUID=1000
+            - PGID=1000
+            - TZ=America/Vancouver
+            - PROJECTS_DIRECTORY=/home/kieran/config/hosts/homeserver/docker
+            - ENCRYPTION_KEY_FILE=/run/secrets/arcane-encryption-key
+            - OIDC_ENABLED=true
+            - OIDC_CLIENT_ID=cb582769-90fe-4bbb-af3b-d72ea25da023
+            - OIDC_CLIENT_SECRET_FILE=/run/secrets/arcane-oidc-client-secret
+            - OIDC_ISSUER_URL=https://id.kfreitag.ca
+            - OIDC_SCOPES=openid email profile groups
+            - OIDC_AUTO_REDIRECT_TO_PROVIDER=true
+            - OIDC_PROVIDER_NAME=RhodhouseID
+            - OIDC_ROLE_MAPPINGS=[{"claimValue":"admins","roleId":"role_admin"}]
+            - TRUSTED_PROXIES=172.16.0.0/12
+        networks:
+            - caddy_network
+        labels:
+            caddy: containers.kfreitag.ca
+            caddy.reverse_proxy: "{{upstreams 3552}}"
+
+networks:
+    caddy_network:
+        external: true

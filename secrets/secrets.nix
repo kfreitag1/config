@@ -7,6 +7,10 @@ let
     homeserver = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAcM3fGjT0HJ2ApA0m/6oyFJV9HBJk/9JzhB3P0IVdOu root@homeserver";
   };
 
+  userKeys = {
+    kieran = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEG2TpITPEazCINcPbeY6zndBWAoZRNSfRD9rhWI96iu kieran@nixos";
+  };
+
   personal = [ "kieran-m4pro" "kieran-nixos-t2" "kieran-nixos-vm" "homeserver" ];
   all = [ "kieran-work" ] ++ personal;
 
@@ -27,6 +31,8 @@ let
     "paseo-password" = personal;
     "hoser-shop-api-secret" = personal;
     "open-webui-oidc-client-secret" = personal;
+    "arcane-encryption-key" = personal;
+    "arcane-oidc-client-secret" = personal;
     "restic-b2-env" = personal;
     "restic-repo-password" = personal;
   };
@@ -35,6 +41,6 @@ builtins.listToAttrs (map (name: {
   name = "${name}.age";
   value = {
     hosts = secretHosts.${name};
-    publicKeys = map (h: hostKeys.${h}) secretHosts.${name};
+    publicKeys = map (h: hostKeys.${h}) secretHosts.${name} ++ [ userKeys.kieran ];
   };
 }) (builtins.attrNames secretHosts))

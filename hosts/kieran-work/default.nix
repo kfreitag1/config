@@ -21,6 +21,10 @@ in
   # nix-daemon is managed by tec, not nix-darwin
   nix.enable = false;
 
+  # /etc/ssl is managed by Shopify IT, not nix-darwin
+  security.pki.installCACerts = false;
+  environment.variables.NIX_SSL_CERT_FILE = "/etc/ssl/certs/ca-certificates.crt";
+
   homebrew = {
     brews = [
       "yarn"

@@ -367,6 +367,7 @@ do
       { '<leader>s', group = '[S]earch', mode = { 'n', 'v' } },
       { '<leader>t', group = '[T]oggle' },
       { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } }, -- Enable gitsigns recommended keymaps first
+      { '<leader>g', group = '[G]it' },
       { 'gr', group = 'LSP Actions', mode = { 'n' } },
     },
   }
@@ -482,10 +483,17 @@ do
       -- shown explicitly so you know where to change it).
       replace_netrw = true,
     },
+    lazygit = {
+      config = { gui = { nerdFontsVersion = vim.g.have_nerd_font and '3' or '' } },
+    },
   }
 
   -- Toggle the file explorer sidebar.
   vim.keymap.set('n', '<leader>e', function() Snacks.explorer() end, { desc = 'File [E]xplorer' })
+
+  vim.keymap.set('n', '<leader>gg', function() Snacks.lazygit() end, { desc = 'Lazy[G]it' })
+  vim.keymap.set('n', '<leader>gl', function() Snacks.lazygit.log() end, { desc = '[G]it [L]og' })
+  vim.keymap.set('n', '<leader>gf', function() Snacks.lazygit.log_file() end, { desc = '[G]it [F]ile history' })
 
   -- All picker functions live on `Snacks.picker`. Run `:lua =vim.tbl_keys(Snacks.picker)`
   -- (or `<leader>ss`) to discover everything it can search.

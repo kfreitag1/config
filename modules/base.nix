@@ -60,13 +60,15 @@
       lazygit
       tree-sitter
       gnumake
-      gcc
       unzip
       curl
       wget
 
       inputs.agenix.packages.${pkgs.stdenv.hostPlatform.system}.default
-    ] ++ lib.optionals pkgs.stdenv.isLinux [ wl-clipboard ];
+    ] ++ lib.optionals pkgs.stdenv.isLinux [
+      gcc
+      wl-clipboard
+    ];
 
     programs.zsh.enable = true;
     programs.zsh.enableCompletion = true;

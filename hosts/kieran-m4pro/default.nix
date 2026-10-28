@@ -28,12 +28,6 @@ in
   ];
 
   homebrew = {
-    taps = [
-      {
-        name = "shopify/shopify";
-        trusted = true;
-      }
-    ];
     casks = [
       "google-chrome"
       "daisydisk"

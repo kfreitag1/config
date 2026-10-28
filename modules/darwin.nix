@@ -34,7 +34,12 @@
 
   homebrew = {
     enable = true;
-    taps = [ ];
+    taps = [
+      {
+        name = "shopify/shopify";
+        trusted = true;
+      }
+    ];
     casks = [
       "karabiner-elements"
       "rectangle-pro"

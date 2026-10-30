@@ -2,3 +2,4 @@
 *.lock
 !flake.lock
 result
+dotfiles/personal/pi/agent/auth.json

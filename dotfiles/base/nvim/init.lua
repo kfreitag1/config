@@ -165,7 +165,7 @@ do
   vim.o.cursorline = true
 
   -- Minimal number of screen lines to keep above and below the cursor.
-  vim.o.scrolloff = 10
+  vim.o.scrolloff = 15
 
   -- if performing an operation that would fail due to unsaved changes in the buffer (like `:q`),
   -- instead raise a dialog asking if you wish to save the current file(s)
@@ -354,6 +354,39 @@ do
       topdelete = { text = '‾' }, ---@diagnostic disable-line: missing-fields
       changedelete = { text = '~' }, ---@diagnostic disable-line: missing-fields
     },
+    on_attach = function(bufnr)
+      local gs = package.loaded.gitsigns
+      local map = function(lhs, rhs, desc, mode)
+        mode = mode or 'n'
+        vim.keymap.set(mode, lhs, rhs, { buffer = bufnr, desc = 'Git ' .. desc })
+      end
+
+      map(']h', function()
+        if vim.wo.diff then
+          vim.cmd.normal { ']h', bang = true }
+        else
+          gs.nav_hunk('next')
+        end
+      end, 'Next [H]unk')
+      map('[h', function()
+        if vim.wo.diff then
+          vim.cmd.normal { '[h', bang = true }
+        else
+          gs.nav_hunk('prev')
+        end
+      end, 'Previous [H]unk')
+
+      map('hs', gs.stage_hunk, '[S]tage Hunk', { 'n', 'v' })
+      map('hr', gs.reset_hunk, '[R]eset Hunk', { 'n', 'v' })
+      map('hS', gs.stage_buffer, 'Stage [B]uffer')
+      map('hu', gs.undo_stage_hunk, '[U]ndo Stage Hunk')
+      map('hR', gs.reset_buffer, 'Reset Buffer')
+      map('hp', gs.preview_hunk, '[P]review Hunk')
+      map('hb', function() gs.blame_line { full = true } end, '[B]lame Line')
+      map('tb', gs.toggle_current_line_blame, '[T]oggle [B]lame')
+      map('hd', gs.diffthis, '[D]iff This')
+      map('hD', function() gs.diffthis '~' end, 'Diff This (~)')
+    end,
   }
 
   -- Useful plugin to show you pending keybinds.
@@ -475,6 +508,7 @@ do
   require('snacks').setup {
     bigfile = { enabled = true },
     quickfile = { enabled = true },
+    lazygit = { enabled = true },
     picker = {
       -- ui_select = true is the default: `vim.ui.select` uses the picker.
     },
@@ -490,8 +524,9 @@ do
 
   -- Toggle the file explorer sidebar.
   vim.keymap.set('n', '<leader>e', function() Snacks.explorer() end, { desc = 'File [E]xplorer' })
+  vim.keymap.set('n', '<leader>gg', function() Snacks.lazygit { cwd = Snacks.git.get_root() } end, { desc = 'Lazygit' })
+  vim.keymap.set('n', '<leader>gG', function() Snacks.lazygit { cwd = vim.uv.cwd() } end, { desc = 'Lazygit (cwd)' })
 
-  vim.keymap.set('n', '<leader>gg', function() Snacks.lazygit() end, { desc = 'Lazy[G]it' })
   vim.keymap.set('n', '<leader>gl', function() Snacks.lazygit.log() end, { desc = '[G]it [L]og' })
   vim.keymap.set('n', '<leader>gf', function() Snacks.lazygit.log_file() end, { desc = '[G]it [F]ile history' })
 

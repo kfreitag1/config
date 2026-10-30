@@ -62,8 +62,8 @@ in
       "lazydocker"
       "pandoc"
       "pi-coding-agent"
-      "shopify-cli"
-      "sunshine"
+      "shopify/shopify/shopify-cli"
+      "lizardbyte/homebrew/sunshine"
     ];
   };
 }

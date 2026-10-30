@@ -28,6 +28,12 @@ in
   ];
 
   homebrew = {
+    taps = [
+      {
+        name = "lizardbyte/homebrew";
+        trusted = true;
+      }
+    ];
     casks = [
       "google-chrome"
       "daisydisk"
@@ -57,6 +63,7 @@ in
       "pandoc"
       "pi-coding-agent"
       "shopify-cli"
+      "sunshine"
     ];
   };
 }

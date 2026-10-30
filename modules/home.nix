@@ -25,6 +25,8 @@ let
   force = [
     "karabiner/karabiner.json"
     "pi/agent/settings.json"
+    "sunshine/apps.json"
+    "sunshine/sunshine.conf"
   ];
 
   # Relative paths of all files under `dir` (readDir runs on the flake's

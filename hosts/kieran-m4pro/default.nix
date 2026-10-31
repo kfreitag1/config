@@ -63,7 +63,7 @@ in
       "pandoc"
       "pi-coding-agent"
       "shopify/shopify/shopify-cli"
-      "lizardbyte/homebrew/sunshine"
+      "lizardbyte/homebrew/sunshine-beta"
     ];
   };
 }

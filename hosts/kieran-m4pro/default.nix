@@ -55,6 +55,7 @@ in
       "the-unarchiver"
       "dbeaver-community"
       "utm"
+      "betterdisplay"
     ];
     brews = [
       "openfst"
@@ -64,6 +65,7 @@ in
       "pi-coding-agent"
       "shopify/shopify/shopify-cli"
       "lizardbyte/homebrew/sunshine-beta"
+      "displayplacer"
     ];
   };
 }

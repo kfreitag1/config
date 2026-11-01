@@ -30,8 +30,7 @@ let
     "paseo-password" = personal;
     "hoser-shop-api-secret" = personal;
     "open-webui-oidc-client-secret" = personal;
-    "arcane-encryption-key" = personal;
-    "arcane-oidc-client-secret" = personal;
+    "stacky-oidc-client-secret" = personal;
     "norish-oidc-client-secret" = personal;
     "karakeep-oidc-client-secret" = personal;
     "karakeep-nextauth-secret" = personal;

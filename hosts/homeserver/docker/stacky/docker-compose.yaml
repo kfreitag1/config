@@ -1,0 +1,33 @@
+services:
+    stacky:
+        image: ghcr.io/patsissons/stacky:latest
+        container_name: stacky
+        restart: always
+        entrypoint:
+            - /bin/sh
+            - -c
+            - export STACKY_OIDC_CLIENT_SECRET="$$(cat /run/secrets/stacky-oidc-client-secret)" && (sed -i 's|sign-in/oauth2|sign-in/social|; s|{providerId:e,callbackURL|{provider:e,callbackURL|' /app/web/assets/index-*.js; sed -i 's|/assets/index-\([A-Za-z0-9_-]*\)\.js|/assets/index-\1.js?v=2|g' /app/web/index.html) && exec /sbin/tini -- node /app/server/dist/index.js
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock
+            - ./data:/app/data
+            - /home/kieran/config/hosts/homeserver/docker:/home/kieran/config/hosts/homeserver/docker
+            - /run/agenix/stacky-oidc-client-secret:/run/secrets/stacky-oidc-client-secret:ro
+        environment:
+            - STACKY_STACKS_DIR=/home/kieran/config/hosts/homeserver/docker
+            - STACKY_BASE_URL=https://stacks.kfreitag.ca
+            - STACKY_OIDC_ISSUER=https://id.kfreitag.ca
+            - STACKY_OIDC_CLIENT_ID=${STACKY_OIDC_CLIENT_ID:?required}
+            - STACKY_OIDC_NAME=RhodhouseID
+            - STACKY_OIDC_SCOPES=openid profile email groups
+            - STACKY_OIDC_AUTO_REDIRECT=true
+            - STACKY_TRUSTED_PROXIES=172.16.0.0/12
+            - TZ=America/Vancouver
+        labels:
+            caddy: stacks.kfreitag.ca
+            caddy.reverse_proxy: "{{upstreams 5005}}"
+        networks:
+            - caddy_network
+
+networks:
+    caddy_network:
+        external: true

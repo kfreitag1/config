@@ -88,10 +88,10 @@
             href: https://status.kfreitag.ca
             icon: uptime-kuma
             description: Service status
-      - Dockhand:
-            href: https://containers.kfreitag.ca
+      - Stacky:
+            href: https://stacks.kfreitag.ca
             icon: docker
-            description: Containers
+            description: Stacks
       - Pocket ID:
             href: https://id.kfreitag.ca
             icon: pocket-id

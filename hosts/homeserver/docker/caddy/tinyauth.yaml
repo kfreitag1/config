@@ -1,0 +1,13 @@
+appUrl: https://auth.kfreitag.ca
+oauth:
+    autoRedirect: pocketid
+    providers:
+        pocketid:
+            name: RhodhouseID
+            clientId: bac2503d-7cc1-4f87-9985-20a3bff67eb1
+            clientSecretFile: /run/secrets/admin-apps-oidc-client-secret
+            authUrl: https://id.kfreitag.ca/authorize
+            tokenUrl: https://id.kfreitag.ca/api/oidc/token
+            userinfoUrl: https://id.kfreitag.ca/api/oidc/userinfo
+            redirectUrl: https://auth.kfreitag.ca/api/oauth/callback/pocketid
+            scopes: openid email profile groups

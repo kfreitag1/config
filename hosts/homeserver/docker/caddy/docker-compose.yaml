@@ -28,20 +28,21 @@ services:
 
   tinyauth:
     container_name: tinyauth
-    image: ghcr.io/steveiliop56/tinyauth:v4
+    image: ghcr.io/steveiliop56/tinyauth:v5
     restart: unless-stopped
     environment:
-      - APP_URL=https://auth.kfreitag.ca
-      - PROVIDERS_POCKETID_CLIENT_ID=bac2503d-7cc1-4f87-9985-20a3bff67eb1
-      - PROVIDERS_POCKETID_CLIENT_SECRET_FILE=/run/secrets/admin-apps-oidc-client-secret
-      - PROVIDERS_POCKETID_AUTH_URL=https://id.kfreitag.ca/authorize
-      - PROVIDERS_POCKETID_TOKEN_URL=https://id.kfreitag.ca/api/oidc/token
-      - PROVIDERS_POCKETID_USER_INFO_URL=https://id.kfreitag.ca/api/oidc/userinfo
-      - PROVIDERS_POCKETID_REDIRECT_URL=https://auth.kfreitag.ca/api/oauth/callback/pocketid
-      - PROVIDERS_POCKETID_SCOPES=openid email profile groups
-      - PROVIDERS_POCKETID_NAME=RhodhouseID
-      - OAUTH_AUTO_REDIRECT=pocketid
+      - TINYAUTH_EXPERIMENTAL_CONFIGFILE=/config.yaml
+      - TINYAUTH_APPURL=https://auth.kfreitag.ca
+      - TINYAUTH_PROVIDERS_POCKETID_CLIENTID=bac2503d-7cc1-4f87-9985-20a3bff67eb1
+      - TINYAUTH_PROVIDERS_POCKETID_CLIENTSECRETFILE=/run/secrets/admin-apps-oidc-client-secret
+      - TINYAUTH_PROVIDERS_POCKETID_AUTHURL=https://id.kfreitag.ca/authorize
+      - TINYAUTH_PROVIDERS_POCKETID_TOKENURL=https://id.kfreitag.ca/api/oidc/token
+      - TINYAUTH_PROVIDERS_POCKETID_USERINFOURL=https://id.kfreitag.ca/api/oidc/userinfo
+      - TINYAUTH_PROVIDERS_POCKETID_REDIRECTURL=https://auth.kfreitag.ca/api/oauth/callback/pocketid
+      - TINYAUTH_PROVIDERS_POCKETID_SCOPES=openid email profile groups
+      - TINYAUTH_PROVIDERS_POCKETID_NAME=RhodhouseID
     volumes:
+      - ./tinyauth.yaml:/config.yaml:ro
       - /run/agenix/admin-apps-oidc-client-secret:/run/secrets/admin-apps-oidc-client-secret:ro
     networks:
       - caddy_network

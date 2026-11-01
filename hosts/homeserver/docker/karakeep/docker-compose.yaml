@@ -1,61 +1,62 @@
 services:
-    karakeep:
-        image: ghcr.io/karakeep-app/karakeep:release
-        container_name: karakeep
-        restart: always
-        entrypoint:
-            - /bin/sh
-            - -c
-            - export NEXTAUTH_SECRET="$$(cat /run/secrets/karakeep-nextauth-secret)" MEILI_MASTER_KEY="$$(cat /run/secrets/karakeep-meili-master-key)" OAUTH_CLIENT_SECRET="$$(cat /run/secrets/karakeep-oidc-client-secret)" && exec /init
-        volumes:
-            - ./data:/data
-            - /run/agenix/karakeep-nextauth-secret:/run/secrets/karakeep-nextauth-secret:ro
-            - /run/agenix/karakeep-meili-master-key:/run/secrets/karakeep-meili-master-key:ro
-            - /run/agenix/karakeep-oidc-client-secret:/run/secrets/karakeep-oidc-client-secret:ro
-        environment:
-            - DATA_DIR=/data
-            - NEXTAUTH_URL=https://keep.kfreitag.ca
-            - MEILI_ADDR=http://meilisearch:7700
-            - BROWSER_WEB_URL=http://chrome:9222
-            - OAUTH_WELLKNOWN_URL=https://id.kfreitag.ca/.well-known/openid-configuration
-            - OAUTH_CLIENT_ID=${OAUTH_CLIENT_ID:?required}
-            - OAUTH_PROVIDER_NAME=Pocket ID
-            - OAUTH_AUTO_REDIRECT=true
-            - DISABLE_PASSWORD_AUTH=true
-        labels:
-            caddy: keep.kfreitag.ca
-            caddy.reverse_proxy: "{{upstreams 3000}}"
-        networks:
-            - caddy_network
-            - default
+  karakeep:
+    image: ghcr.io/karakeep-app/karakeep:release
+    container_name: karakeep
+    restart: always
+    entrypoint:
+      - /bin/sh
+      - -c
+      - export NEXTAUTH_SECRET="$$(cat /run/secrets/karakeep-nextauth-secret)" MEILI_MASTER_KEY="$$(cat /run/secrets/karakeep-meili-master-key)" OAUTH_CLIENT_SECRET="$$(cat /run/secrets/karakeep-oidc-client-secret)" && exec /init
+    volumes:
+      - ./data:/data
+      - /run/agenix/karakeep-nextauth-secret:/run/secrets/karakeep-nextauth-secret:ro
+      - /run/agenix/karakeep-meili-master-key:/run/secrets/karakeep-meili-master-key:ro
+      - /run/agenix/karakeep-oidc-client-secret:/run/secrets/karakeep-oidc-client-secret:ro
+    environment:
+      - DATA_DIR=/data
+      - NEXTAUTH_URL=https://keep.kfreitag.ca
+      - MEILI_ADDR=http://meilisearch:7700
+      - BROWSER_WEB_URL=http://chrome:9222
+      - OAUTH_WELLKNOWN_URL=https://id.kfreitag.ca/.well-known/openid-configuration
+      - OAUTH_CLIENT_ID=${OAUTH_CLIENT_ID:?required}
+      - OAUTH_PROVIDER_NAME=Pocket ID
+      - OAUTH_AUTO_REDIRECT=true
+      - DISABLE_PASSWORD_AUTH=true
+    labels:
+      caddy: keep.kfreitag.ca
+      caddy.reverse_proxy: "{{upstreams 3000}}"
+    networks:
+      - caddy_network
+      - default
 
-    chrome:
-        image: ghcr.io/karakeep-app/karakeep-chrome:release
-        container_name: karakeep-chrome
-        restart: always
-        init: true
-        command:
-            - --disable-gpu
-            - --disable-dev-shm-usage
-            - --hide-scrollbars
-            - --disable-blink-features=AutomationControlled
-            - --window-size=1440,900
+  chrome:
+    image: ghcr.io/karakeep-app/karakeep-chrome:release
+    container_name: karakeep-chrome
+    restart: always
+    init: true
+    command:
+      - --disable-gpu
+      - --disable-dev-shm-usage
+      - --hide-scrollbars
+      - --disable-blink-features=AutomationControlled
+      - --window-size=1440,900
 
-    meilisearch:
-        image: getmeili/meilisearch:v1.41.0
-        container_name: karakeep-meili
-        restart: always
-        command:
-            - sh
-            - -c
-            - export MEILI_MASTER_KEY="$$(cat /run/secrets/karakeep-meili-master-key)" && exec /bin/meilisearch
-        environment:
-            - MEILI_NO_ANALYTICS=true
-        volumes:
-            - ./meili:/meili_data
-            - /run/agenix/karakeep-meili-master-key:/run/secrets/karakeep-meili-master-key:ro
+  meilisearch:
+    image: getmeili/meilisearch:v1.56.0
+    container_name: karakeep-meili
+    restart: always
+    command:
+      - sh
+      - -c
+      - export MEILI_MASTER_KEY="$$(cat /run/secrets/karakeep-meili-master-key)" && exec /bin/meilisearch
+    environment:
+      - MEILI_NO_ANALYTICS=true
+      - MEILI_UPGRADE_DB=true
+    volumes:
+      - ./meili:/meili_data
+      - /run/agenix/karakeep-meili-master-key:/run/secrets/karakeep-meili-master-key:ro
 
 networks:
-    caddy_network:
-        external: true
-    default: {}
+  caddy_network:
+    external: true
+  default: {}

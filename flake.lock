@@ -142,7 +142,27 @@
         "agenix": "agenix",
         "home-manager": "home-manager_2",
         "nix-darwin": "nix-darwin",
-        "nixpkgs": "nixpkgs_2"
+        "nixpkgs": "nixpkgs_2",
+        "sunshine": "sunshine"
+      }
+    },
+    "sunshine": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1793558280,
+        "narHash": "sha256-nErgtiGIqF1Gp2EDcaFSlUGC7HuaudH0jIe0O3/zUBo=",
+        "ref": "fix/macos-4k60",
+        "rev": "8577a2a5c1f6dcc09b1cc193ae3dde37f8f91b50",
+        "revCount": 3793,
+        "submodules": true,
+        "type": "git",
+        "url": "https://github.com/kfreitag1/Sunshine"
+      },
+      "original": {
+        "ref": "fix/macos-4k60",
+        "submodules": true,
+        "type": "git",
+        "url": "https://github.com/kfreitag1/Sunshine"
       }
     },
     "systems": {

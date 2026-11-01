@@ -13,9 +13,19 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    sunshine = {
+      url = "git+https://github.com/kfreitag1/Sunshine?ref=fix/macos-4k60&submodules=1";
+      flake = false;
+    };
   };
 
-  outputs = inputs@{ self, nixpkgs, nix-darwin, agenix, home-manager }: {
+  outputs = inputs@{ self, nixpkgs, nix-darwin, agenix, home-manager, sunshine }: {
+    packages.aarch64-darwin.sunshine-fork =
+      nixpkgs.legacyPackages.aarch64-darwin.callPackage ./packages/sunshine {
+        src = inputs.sunshine;
+      };
+
     darwinConfigurations."kieran-m4pro" = nix-darwin.lib.darwinSystem {
       system = "aarch64-darwin";
       modules = [ ./hosts/kieran-m4pro ];

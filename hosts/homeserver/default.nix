@@ -1,4 +1,7 @@
-{ inputs, ... }:
+{ inputs, config, ... }:
+let
+  repoRoot = "${config.users.users.${config.kieran.primaryUser}.home}/config";
+in
 {
   imports = [
     inputs.agenix.nixosModules.default
@@ -18,4 +21,11 @@
     group = "docker";
   };
   age.identityPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
+
+  home-manager.users.${config.kieran.primaryUser}.kieran.dotfiles.overlays = [
+    {
+      sourceDir = ../../dotfiles/homeserver;
+      checkout = "${repoRoot}/dotfiles/homeserver";
+    }
+  ];
 }

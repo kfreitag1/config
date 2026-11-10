@@ -42,7 +42,7 @@ services:
       - --window-size=1440,900
 
   meilisearch:
-    image: getmeili/meilisearch:v1.56.0
+    image: getmeili/meilisearch:v1.56.1
     container_name: karakeep-meili
     restart: always
     command:

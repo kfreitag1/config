@@ -511,6 +511,12 @@ do
     lazygit = { enabled = true },
     picker = {
       -- ui_select = true is the default: `vim.ui.select` uses the picker.
+      sources = {
+        explorer = {
+          hidden = true,
+          ignored = true,
+        },
+      },
     },
     explorer = {
       -- Take over netrw as the default file browser (this is the default,

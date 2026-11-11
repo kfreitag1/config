@@ -9,6 +9,12 @@ in
 {
   imports = [ ../../modules/darwin.nix ];
 
+  nix.gc = {
+    automatic = true;
+    options = "--delete-older-than 14d";
+  };
+  nix.optimise.automatic = true;
+
   environment.variables.MACHINE_PROFILE = "personal";
 
   home-manager.users.${config.kieran.primaryUser} = {

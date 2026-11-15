@@ -68,6 +68,10 @@
             href: https://hoser-shop-admin.kfreitag.ca
             icon: si-shopify
             description: Shopify admin
+      - Simple Transfer:
+            href: https://send.kfreitag.ca
+            icon: send
+            description: File sending
 
 - AI:
       - Open WebUI:

@@ -49,6 +49,7 @@ let
     ${sqlite} ${repoRoot}/hosts/homeserver/docker/karakeep/data/db.sqlite ".backup ${dumpDir}/karakeep.db"
     ${sqlite} ${repoRoot}/hosts/homeserver/docker/arr/bazarr/config/db/bazarr.db ".backup ${dumpDir}/arr-bazarr.db"
     ${sqlite} ${repoRoot}/hosts/homeserver/docker/arr/prowlarr/config/prowlarr.db ".backup ${dumpDir}/arr-prowlarr.db"
+    ${sqlite} ${repoRoot}/hosts/homeserver/docker/simple-transfer/data/db/app.sqlite ".backup ${dumpDir}/simple-transfer.db"
   '';
 
   backupCleanupCommand = ''
@@ -91,6 +92,7 @@ in
       "${repoRoot}/hosts/homeserver/docker/karakeep/data/db.sqlite*"
       "${repoRoot}/hosts/homeserver/docker/paperless/data/db.sqlite3*"
       "${repoRoot}/hosts/homeserver/docker/pocket-id/data/pocket-id.db*"
+      "${repoRoot}/hosts/homeserver/docker/simple-transfer/data/db"
       "${repoRoot}/hosts/homeserver/docker/open-web-ui/data/webui.db*"
       "${repoRoot}/hosts/homeserver/docker/hoser-shop-admin/data/sessions.sqlite*"
       "${repoRoot}/hosts/homeserver/docker/jellyfin/jellyfin/config/data/jellyfin.db*"

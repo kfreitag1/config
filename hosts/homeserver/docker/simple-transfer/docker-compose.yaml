@@ -1,0 +1,29 @@
+services:
+  simple-transfer:
+    container_name: simple-transfer
+    image: ghcr.io/kfreitag1/simple-transfer:latest
+    restart: unless-stopped
+    environment:
+      BASE_URL: https://send.kfreitag.ca
+      TRUST_PROXY: "true"
+      AUTH_SECRET_FILE: /run/secrets/oidc-client-secret
+      OIDC_ISSUER: https://id.kfreitag.ca
+      OIDC_CLIENT_ID: ${OIDC_CLIENT_ID:?required}
+      OIDC_CLIENT_SECRET_FILE: /run/secrets/oidc-client-secret
+      OIDC_PROVIDER_NAME: Rhodhouse ID
+      DB_PATH: /data/db/app.sqlite
+      STORAGE_DIR: /data/files
+    volumes:
+      - ./data/db:/data/db
+      - /mnt/cache/simple-transfer/files:/data/files
+      - /run/agenix/simple-transfer-oidc-client-secret:/run/secrets/oidc-client-secret:ro
+    labels:
+      caddy: send.kfreitag.ca
+      caddy.reverse_proxy: "{{upstreams 3000}}"
+    networks:
+      - default
+      - caddy_network
+
+networks:
+  caddy_network:
+    external: true

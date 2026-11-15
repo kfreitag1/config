@@ -137,12 +137,41 @@
         "type": "github"
       }
     },
+    "nixpkgs_3": {
+      "locked": {
+        "lastModified": 1789632929,
+        "narHash": "sha256-j08lBbqaYwjsW0xy6Dh4MNZpQ/oSvLU1MLAo38OXphM=",
+        "rev": "a32edd7654519351e48e80372a928df336394670",
+        "type": "tarball",
+        "url": "https://releases.nixos.org/nixpkgs/nixpkgs-26.11pre1075288.a32edd765451/nixexprs.tar.xz"
+      },
+      "original": {
+        "type": "tarball",
+        "url": "https://channels.nixos.org/nixpkgs-unstable/nixexprs.tar.xz"
+      }
+    },
+    "rex": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_3"
+      },
+      "locked": {
+        "lastModified": 1794692212,
+        "narHash": "sha256-GTlEb9ChSbpxIh+faIcAvq12saSYmy2uR3jSQqURgik=",
+        "type": "tarball",
+        "url": "https://pkgs.superlogical.com/rex/nix/snapshot/0.0.1794692212-g3cf0c1.tar.gz"
+      },
+      "original": {
+        "type": "tarball",
+        "url": "https://pkgs.superlogical.com/rex/nix/snapshot.tar.gz"
+      }
+    },
     "root": {
       "inputs": {
         "agenix": "agenix",
         "home-manager": "home-manager_2",
         "nix-darwin": "nix-darwin",
         "nixpkgs": "nixpkgs_2",
+        "rex": "rex",
         "sunshine": "sunshine"
       }
     },

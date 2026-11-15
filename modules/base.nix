@@ -52,7 +52,6 @@
       yazi
       starship
       gh
-      herdr
 
       # External dependencies required by kickstart.nvim
       ripgrep

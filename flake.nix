@@ -18,9 +18,11 @@
       url = "git+https://github.com/kfreitag1/Sunshine?ref=fix/macos-4k60&submodules=1";
       flake = false;
     };
+
+    rex.url = "https://pkgs.superlogical.com/rex/nix/snapshot.tar.gz";
   };
 
-  outputs = inputs@{ self, nixpkgs, nix-darwin, agenix, home-manager, sunshine }: {
+  outputs = inputs@{ self, nixpkgs, nix-darwin, agenix, home-manager, sunshine, rex }: {
     packages.aarch64-darwin.sunshine-fork =
       nixpkgs.legacyPackages.aarch64-darwin.callPackage ./packages/sunshine {
         src = inputs.sunshine;

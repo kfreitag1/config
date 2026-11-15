@@ -6,6 +6,7 @@ in
   imports = [
     inputs.agenix.nixosModules.default
     inputs.home-manager.nixosModules.home-manager
+    inputs.rex.nixosModules.default
     ../../modules/base.nix
     ./backup.nix
     ./configuration.nix

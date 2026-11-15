@@ -123,9 +123,11 @@
   users.users.${config.kieran.primaryUser} = {
     isNormalUser = true;
     description = "Kieran Freitag";
-    extraGroups = [ "networkmanager" "wheel" "docker" ];
+    extraGroups = [ "networkmanager" "wheel" "docker" "rex" ];
     shell = pkgs.zsh;
   };
+
+  services.rex.enable = true;
 
   environment.systemPackages = with pkgs; [
     xfsprogs

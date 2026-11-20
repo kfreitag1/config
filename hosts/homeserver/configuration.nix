@@ -127,6 +127,8 @@
     shell = pkgs.zsh;
   };
 
+  security.sudo.wheelNeedsPassword = false;
+
   environment.systemPackages = with pkgs; [
     xfsprogs
     mergerfs

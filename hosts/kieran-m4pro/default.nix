@@ -41,7 +41,6 @@ in
     programs.rex = {
       enable = true;
       sshGuard = false;
-      config = ../../dotfiles/base/rex/init.lua;
     };
 
     launchd.agents.sunshine = {

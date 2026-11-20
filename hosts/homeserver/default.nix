@@ -33,7 +33,6 @@ in
     programs.ssh.enable = true;
     programs.rex = {
       enable = true;
-      config = ../../dotfiles/base/rex/init.lua;
     };
   };
 }

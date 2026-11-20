@@ -17,7 +17,10 @@ in
 
   environment.variables.MACHINE_PROFILE = "personal";
 
-  home-manager.users.${config.kieran.primaryUser} = {
+  home-manager.users.${config.kieran.primaryUser} = { config, ... }: {
+    home.file.".local/bin/rex".source =
+      config.lib.file.mkOutOfStoreSymlink "/Applications/Rex Beta.app/Contents/Helpers/Rex Server.rex/Contents/MacOS/rex";
+
     kieran.dotfiles.overlays = [
       {
         sourceDir = ../../dotfiles/personal;

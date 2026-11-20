@@ -58,7 +58,7 @@ function y() {
     [ "$cwd" != "$PWD" ] && [ -d "$cwd" ] && builtin cd -- "$cwd" || builtin true
     command rm -f -- "$tmp"
 }
-
+alias cld='claude --dangerously-skip-permissions'
 
 # per-profile drop-ins (home-manager links one per machine)
 for f in "$ZDOTDIR"/zshrc.d/*.zsh(N); do source "$f"; done

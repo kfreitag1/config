@@ -9,6 +9,7 @@ services:
             - export STACKY_OIDC_CLIENT_SECRET="$$(cat /run/secrets/stacky-oidc-client-secret)" && (sed -i 's|sign-in/oauth2|sign-in/social|; s|{providerId:e,callbackURL|{provider:e,callbackURL|' /app/web/assets/index-*.js; sed -i 's|/assets/index-\([A-Za-z0-9_-]*\)\.js|/assets/index-\1.js?v=2|g' /app/web/index.html) && exec /sbin/tini -- node /app/server/dist/index.js
         volumes:
             - /var/run/docker.sock:/var/run/docker.sock
+            - /nix/store:/nix/store:ro
             - ./data:/app/data
             - /home/kieran/config/hosts/homeserver/docker:/home/kieran/config/hosts/homeserver/docker
             - /run/agenix/stacky-oidc-client-secret:/run/secrets/stacky-oidc-client-secret:ro

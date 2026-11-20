@@ -52,7 +52,7 @@ services:
 
   obscura:
     container_name: norish-obscura
-    image: docker.io/norishapp/obscura:0.2.5-norish.1
+    image: docker.io/norishapp/obscura:0.2.7-norish.1
     restart: always
     network_mode: "service:norish"
     entrypoint:
@@ -80,6 +80,8 @@ services:
     container_name: norish-postgres
     image: postgres:18-alpine
     restart: always
+    labels:
+      stacky.tag.include: "^18-alpine$"
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: norish

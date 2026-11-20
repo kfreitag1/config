@@ -49,6 +49,7 @@ services:
     labels:
       caddy: auth.kfreitag.ca
       caddy.reverse_proxy: "{{upstreams 3000}}"
+      stacky.tag.include: "^v5$"
 
 networks:
   caddy_network:

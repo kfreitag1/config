@@ -1,6 +1,8 @@
 services:
   postgres:
     image: postgres:18
+    labels:
+      stacky.tag.include: "^18$"
     command: >
       postgres -c wal_level=logical -c max_replication_slots=10 -c max_wal_senders=10
     environment:

@@ -9,6 +9,7 @@ services:
             caddy: status.kfreitag.ca
             caddy.reverse_proxy: "{{upstreams 3001}}"
             caddy.import: tinyauth_forwarder *
+            stacky.tag.include: "^2$"
         networks:
             - caddy_network
 

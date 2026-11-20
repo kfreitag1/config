@@ -42,9 +42,11 @@ services:
       - --window-size=1440,900
 
   meilisearch:
-    image: getmeili/meilisearch:v1.56.1
+    image: getmeili/meilisearch:v1.57.0
     container_name: karakeep-meili
     restart: always
+    labels:
+      stacky.tag.include: "^v1\\."
     command:
       - sh
       - -c

@@ -43,7 +43,6 @@
     casks = [
       "karabiner-elements"
       "rectangle-pro"
-      "ghostty"
       "zed"
       "obsidian"
       "monitorcontrol"

@@ -7,16 +7,19 @@ in
 
   environment.variables.MACHINE_PROFILE = "work";
 
-  home-manager.users.${config.kieran.primaryUser}.kieran.dotfiles.overlays = [
-    {
-      sourceDir = ../../dotfiles/work;
-      checkout = "${repoRoot}/dotfiles/work";
-    }
-    {
-      sourceDir = ../../dotfiles/darwin;
-      checkout = "${repoRoot}/dotfiles/darwin";
-    }
-  ];
+  home-manager.users.${config.kieran.primaryUser} = {
+    kieran.dotfiles.overlays = [
+      {
+        sourceDir = ../../dotfiles/work;
+        checkout = "${repoRoot}/dotfiles/work";
+      }
+      {
+        sourceDir = ../../dotfiles/darwin;
+        checkout = "${repoRoot}/dotfiles/darwin";
+      }
+    ];
+    programs.herdr.enable = true;
+  };
 
   # nix-daemon is managed by tec, not nix-darwin
   nix.enable = false;
@@ -38,6 +41,7 @@ in
     ];
     casks = [
       "google-cloud-sdk"
+      "ghostty"
       "proxyman"
       "keycastr"
       "redisinsight"

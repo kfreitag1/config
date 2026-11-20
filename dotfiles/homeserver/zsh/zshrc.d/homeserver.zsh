@@ -1,0 +1,1 @@
+eval "$(rex completion zsh)"

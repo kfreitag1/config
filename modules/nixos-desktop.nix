@@ -20,16 +20,19 @@ in
 
   environment.variables.MACHINE_PROFILE = "personal";
 
-  home-manager.users.${config.kieran.primaryUser}.kieran.dotfiles.overlays = [
-    {
-      sourceDir = ../dotfiles/personal;
-      checkout = "${repoRoot}/dotfiles/personal";
-    }
-    {
-      sourceDir = ../dotfiles/nixos;
-      checkout = "${repoRoot}/dotfiles/nixos";
-    }
-  ];
+  home-manager.users.${config.kieran.primaryUser} = {
+    kieran.dotfiles.overlays = [
+      {
+        sourceDir = ../dotfiles/personal;
+        checkout = "${repoRoot}/dotfiles/personal";
+      }
+    ];
+    programs.rex = {
+      enable = true;
+      sshGuard = false;
+      config = ../dotfiles/base/rex/init.lua;
+    };
+  };
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -125,7 +128,6 @@ in
     go
     pi-coding-agent
     restic
-    ghostty
     fuzzel
     swaybg
     brightnessctl

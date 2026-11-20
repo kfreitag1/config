@@ -23,7 +23,7 @@
       useUserPackages = true;
 
       users.${config.kieran.primaryUser} = {
-        imports = [ ./home.nix ];
+        imports = [ ./home.nix inputs.rex.homeManagerModules.default ];
         kieran.dotfiles.shared.checkout = "${config.users.users.${config.kieran.primaryUser}.home}/config/dotfiles/base";
       };
     };
@@ -38,12 +38,6 @@
 
     environment.shellAliases.g = "git";
 
-    environment.interactiveShellInit = ''
-      if [ -n "$REX_BIN_DIR" ]; then
-        export PATH="$REX_BIN_DIR:$PATH"
-      fi
-    '';
-
     fonts.packages = with pkgs; [
       nerd-fonts.jetbrains-mono
     ];
@@ -52,7 +46,6 @@
       neovim
       git
       delta
-      tmux
       jq
       fzf
       yazi

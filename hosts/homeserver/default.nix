@@ -23,10 +23,17 @@ in
   };
   age.identityPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
 
-  home-manager.users.${config.kieran.primaryUser}.kieran.dotfiles.overlays = [
-    {
-      sourceDir = ../../dotfiles/homeserver;
-      checkout = "${repoRoot}/dotfiles/homeserver";
-    }
-  ];
+  home-manager.users.${config.kieran.primaryUser} = {
+    kieran.dotfiles.overlays = [
+      {
+        sourceDir = ../../dotfiles/homeserver;
+        checkout = "${repoRoot}/dotfiles/homeserver";
+      }
+    ];
+    programs.ssh.enable = true;
+    programs.rex = {
+      enable = true;
+      config = ../../dotfiles/base/rex/init.lua;
+    };
+  };
 }

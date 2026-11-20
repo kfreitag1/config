@@ -1,0 +1,7 @@
+#!/bin/sh
+cols=$(tput cols)
+[ -n "$cols" ] || cols=80
+if [ "$cols" -ge 100 ] 2>/dev/null; then
+  exec delta --side-by-side --line-numbers "$@"
+fi
+exec delta "$@"

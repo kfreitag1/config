@@ -3,13 +3,14 @@
     email = kfreitag@kieran.ca
 [core]
     editor = nvim
-    pager = delta
+    pager = ~/.config/git/delta-pager
 [interactive]
     diffFilter = delta --color-only
 [delta]
     navigate = true
-    line-numbers = true
-    side-by-side = true
+    line-numbers = false
+    side-by-side = false
+    width = variable
     syntax-theme = Catppuccin Mocha
 [credential "https://github.com"]
     helper = ""

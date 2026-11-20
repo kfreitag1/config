@@ -25,6 +25,7 @@
       users.${config.kieran.primaryUser} = {
         imports = [ ./home.nix inputs.rex.homeManagerModules.default ];
         kieran.dotfiles.shared.checkout = "${config.users.users.${config.kieran.primaryUser}.home}/config/dotfiles/base";
+        programs.claude-code.enable = true;
       };
     };
 

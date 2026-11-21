@@ -28,6 +28,7 @@
     "/mnt/storage" = {
       device = "/mnt/disk*";
       fsType = "fuse.mergerfs";
+      depends = [ "/mnt/disk1" ];
       options = [
         "defaults"
         "allow_other"

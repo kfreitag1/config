@@ -13,6 +13,14 @@ let
     (lib.filterAttrs (name: type: type == "directory")
     (builtins.readDir ./docker));
 
+  storageMounts = {
+    aurral = "/mnt/storage/media/music";
+    arr = "/mnt/storage/media";
+    audiobookshelf = "/mnt/storage/media";
+    jellyfin = "/mnt/storage/media";
+    paperless = "/mnt/storage/docs";
+  };
+
   mkDockerComposeService = stack:
     let
       # Path type so that the compose file gets tracked in the nix store
@@ -21,8 +29,8 @@ let
     {
       "docker-compose-${stack}" = {
         description = "Docker Compose - ${stack}";
-        after = [ "docker.service" "create-caddy-network.service" ];
-        requires = [ "docker.service" "create-caddy-network.service" ];
+        after = [ "docker.service" "create-caddy-network.service" ] ++ lib.optional (storageMounts ? ${stack}) "mnt-storage.mount";
+        requires = [ "docker.service" "create-caddy-network.service" ] ++ lib.optional (storageMounts ? ${stack}) "mnt-storage.mount";
 
         serviceConfig = {
           SupplementaryGroups = [ "docker" ];
